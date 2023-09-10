@@ -1,14 +1,70 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 
+import { marked as markedFactory } from 'lib/content-processor/markdown-process.js';
+import { textmath2laObj as textmath2laObjFactory } from 'lib/content-processor/math-process';
+import asciimath2mmlFactory from 'lib/content-processor/am2mml.js';
+import latex2mmlFactory from 'lib/content-processor/tex2mml.js';
+import mml2svg from 'lib/content-processor/mml2svg.js';
+
 export default function Home() {
+  console.log('hit Home');
   const [basic, setBasic] = useState(true);
   const [data, setData] = useState('');
   const [showUseTipModal, setShowUseTipModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
-  const [selecteds, setSelecteds] = useState({});
+  const [selecteds, setSelecteds] = useState({
+    HTML_document_display: 'markdown',
+    HTML_math_display: 'block',
+    color_match: 'blackTextOnWhiteBackground',
+    LaTeX_delimiter: 'bracket',
+  });
+  const [selectionStart, setSelectionStart] = useState(-1);
+  const [selectionEnd, setSelectionEnd] = useState(-1);
+  const [inputArea, setInputArea] = useState(null);
+  const [importFile, setImportFile] = useState(null);
+  const [codemirrorView, setCodemirrorView] = useState(null);
+
+  const content = useMemo(() => {
+    return data.split('\n').map((line) => {
+      return textmath2laObjFactory({
+        latex_delimiter: selecteds['LaTeX_delimiter'],
+        asciimath_delimiter: 'graveaccent',
+      })(line).reduce((a, b) => {
+        let result;
+        if (b.type === 'latex-content') {
+          result = `<div class="sr-only">${latex2mmlFactory({
+            display: selecteds['HTML_math_display'],
+          })(b.data)}</div><div aria-hidden="true">${mml2svg(
+            latex2mmlFactory({
+              display: selecteds['HTML_math_display'],
+            })(b.data),
+          )}</div>`;
+        } else if (b.type === 'asciimath-content') {
+          result = `<div class="sr-only">${asciimath2mmlFactory({
+            display: selecteds['HTML_math_display'],
+          })(b.data)}</div><div aria-hidden="true">${mml2svg(
+            asciimath2mmlFactory({
+              display: selecteds['HTML_math_display'],
+            })(b.data),
+          )}</div>`;
+        } else {
+          result = `${b.data}`;
+        }
+        return a + result;
+      }, '');
+    });
+  }, [data, selecteds]);
+
+  const contentmd = useMemo(() => {
+    return markedFactory({
+      latex_delimiter: selecteds['LaTeX_delimiter'],
+      asciimath_delimiter: 'graveaccent',
+      display: selecteds['HTML_math_display'],
+    })(data);
+  }, [data, selecteds]);
 
   const EditIconsTab = () => <div>EditIconsTab</div>;
 
@@ -37,12 +93,6 @@ export default function Home() {
   };
 
   const $t = useTranslations('Home');
-
-  const contentmd = ''; // Set the value for contentmd
-  const content = []; // Set the value for content
-  const useTip = {}; // Set the value for useTip
-  const settings = {}; // Set the value for settings
-  const $i18n = {}; // Set the value for $i18n
 
   return (
     <div className="home flex flex-wrap pt-16 md:pt-p2 h-screen w-screen overflow-x-hidden overflow-y-auto">
@@ -77,13 +127,16 @@ export default function Home() {
         </div>
         <EditIconsTab insert-latex={insertLatex} />
         <div className="flex flex-1">
-          {basic === true ? (
+          {basic ? (
             <textarea
               className="left-side-input-textarea flex-1 resize-none p-3 border border-bd1 overflow-y-scroll rounded-b-lg"
               ref="inputArea"
               type="text"
               value={data}
-              onChange={(e) => setData(e.target.value)}
+              onChange={(e) => {
+                console.log('textarea onChange', e.target.value);
+                setData(e.target.value);
+              }}
             />
           ) : (
             <div

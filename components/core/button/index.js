@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PrimaryButton from './primary-button';
 import SecondaryButton from './secondary-button';
 
-const Button = ({ variant, ...props }) => {
+const Button = ({ variant, ...props } = { variant: 'primary' }) => {
   if (variant === 'primary') {
     return <PrimaryButton {...props} />;
   }
@@ -18,10 +18,6 @@ const Button = ({ variant, ...props }) => {
 
 Button.propTypes = {
   variant: PropTypes.oneOf(['primary', 'secondary']),
-};
-
-Button.defaultProps = {
-  variant: 'primary',
 };
 
 export default Button;

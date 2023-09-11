@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-const SecondaryButton = ({ size, className, ...props }) => {
+const SecondaryButton = (
+  { size, className, ...props } = {
+    size: 'md',
+  },
+) => {
   if (size === 'xs') {
     return (
       <button
@@ -69,10 +73,6 @@ const SecondaryButton = ({ size, className, ...props }) => {
 
 SecondaryButton.propTypes = {
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'l', 'xl']),
-};
-
-SecondaryButton.defaultProps = {
-  size: 'md',
 };
 
 export default SecondaryButton;

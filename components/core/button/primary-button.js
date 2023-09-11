@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-const PrimaryButton = ({ size, className, ...props }) => {
+const PrimaryButton = (
+  { size, className, ...props } = {
+    size: 'md',
+  },
+) => {
   if (size === 'xs') {
     return (
       <button
@@ -69,10 +73,6 @@ const PrimaryButton = ({ size, className, ...props }) => {
 
 PrimaryButton.propTypes = {
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'l', 'xl']),
-};
-
-PrimaryButton.defaultProps = {
-  size: 'md',
 };
 
 export default PrimaryButton;

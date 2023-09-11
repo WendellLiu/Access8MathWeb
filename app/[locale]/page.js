@@ -191,12 +191,18 @@ export default function Home() {
   );
 
   const importClick = useCallback(() => {
-    // Import click logic here
+    importFile.current.click();
   }, []);
 
   const exportClick = useCallback(() => {
-    // Export click logic here
-  }, []);
+    const output = data;
+    const url = window.URL.createObjectURL(new Blob([output]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'export.txt');
+    document.body.appendChild(link);
+    link.click();
+  }, [data]);
 
   const insertLatex = useCallback(() => {
     // Insert LaTeX logic here

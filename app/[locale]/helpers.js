@@ -1,5 +1,5 @@
 import { textmath2laObj as textmath2laObjFactory } from '@/lib/content-processor/math-process';
-import latexs from '@/lib/latexs';
+import latexs from '@/lib/tabs/latexs/latexs';
 
 export const bdconvert = (mode) => (data) => {
   return data

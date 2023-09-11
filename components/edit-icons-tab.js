@@ -8,6 +8,8 @@ import tabs from '@/lib/tabs';
 
 import SvgIcon from '@/components/SvgIcon';
 
+const insertLatex = () => {};
+
 const EditIconsTab = () => {
   const mains = ['math', 'mark_down'];
   const [mainActive, setMainActive] = useState(0);
@@ -48,7 +50,7 @@ const EditIconsTab = () => {
                   key={icon.id}
                   className="w-w5 h-w5 bg-white border group relative"
                   aria-label={`default.markdown.${icon.id}`}
-                  onClick={() => emit('insertLatex', icon)}
+                  onClick={() => insertLatex(icon)}
                 >
                   <SvgIcon name={icon.id} size={51} />
                   <Tab
@@ -114,7 +116,7 @@ const EditIconsTab = () => {
                           key={icon.id}
                           className="w-w5 h-w5 bg-white border group relative"
                           aria-label={`default.latexs.${icon.id}`}
-                          onClick={() => emit('insertLatex', icon)}
+                          onClick={() => insertLatex(icon)}
                         >
                           <SvgIcon name={icon.id} size={51} />
                           <Tab

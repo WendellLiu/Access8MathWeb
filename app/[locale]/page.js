@@ -16,25 +16,10 @@ import { textmath2laObj as textmath2laObjFactory } from '@/lib/content-processor
 import asciimath2mmlFactory from '@/lib/content-processor/am2mml.js';
 import latex2mmlFactory from '@/lib/content-processor/tex2mml.js';
 import mml2svg from '@/lib/content-processor/mml2svg.js';
-import latexs from '@/lib/latexs';
 
 import Button from '@/components/core/button';
 
-const myCompletions = (context) => {
-  let word = context.matchBefore(new RegExp('\\\\\\w*'));
-  if (!word || (word.from == word.to && !context.explicit)) return null;
-  const options = latexs.map((item) => {
-    return {
-      label: item.latex,
-      type: 'text',
-      apply: item.latex,
-    };
-  });
-  return {
-    from: word.from,
-    options,
-  };
-};
+import { myCompletions, bdconvert } from './helpers';
 
 export default function Home() {
   const [basic, setBasic] = useState(false);
@@ -192,9 +177,18 @@ export default function Home() {
     view.focus();
   }, [basic, selecteds, data]);
 
-  const LaTeXSepConvert = useCallback((type) => {
-    // LaTeX Sep Convert logic here
-  }, []);
+  const laTeXSepConvert = useCallback(
+    (mode) => {
+      if (basic) {
+        setData(bdconvert(mode)(data));
+        return;
+      }
+
+      const value = bdconvert(mode)(data);
+      createView(value);
+    },
+    [basic, data, createView],
+  );
 
   const importClick = useCallback(() => {
     // Import click logic here
@@ -228,14 +222,14 @@ export default function Home() {
           <Button
             variant="primary"
             className="ml-2"
-            onClick={() => LaTeXSepConvert('d2b')}
+            onClick={() => laTeXSepConvert('d2b')}
           >
             {$t('dollar2bracket')}
           </Button>
           <Button
             variant="primary"
             className="ml-2"
-            onClick={() => LaTeXSepConvert('b2d')}
+            onClick={() => laTeXSepConvert('b2d')}
           >
             {$t('bracket2dollar')}
           </Button>

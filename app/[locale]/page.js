@@ -18,6 +18,8 @@ import latex2mmlFactory from '@/lib/content-processor/tex2mml.js';
 import mml2svg from '@/lib/content-processor/mml2svg.js';
 import latexs from '@/lib/latexs';
 
+import Button from '@/components/core/button';
+
 const myCompletions = (context) => {
   let word = context.matchBefore(new RegExp('\\\\\\w*'));
   if (!word || (word.from == word.to && !context.explicit)) return null;
@@ -219,24 +221,32 @@ export default function Home() {
         <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
           {$t('editContent')}
         </p>
-        <div className="mt-8 md:mt-m1 flex justify-end items-center mb-m2">
-          <button className="home-btn" onClick={insertMark}>
+        <div className="flex justify-end mb-m2 mt-8 md:mt-m1">
+          <Button variant="primary" className="ml-2" onClick={insertMark}>
             {$t('mark')}
-          </button>
-          <button className="home-btn" onClick={() => LaTeXSepConvert('d2b')}>
+          </Button>
+          <Button
+            variant="primary"
+            className="ml-2"
+            onClick={() => LaTeXSepConvert('d2b')}
+          >
             {$t('dollar2bracket')}
-          </button>
-          <button className="home-btn" onClick={() => LaTeXSepConvert('b2d')}>
+          </Button>
+          <Button
+            variant="primary"
+            className="ml-2"
+            onClick={() => LaTeXSepConvert('b2d')}
+          >
             {$t('bracket2dollar')}
-          </button>
-          <button className="home-btn" onClick={importClick}>
+          </Button>
+          <Button variant="primary" className="ml-2" onClick={importClick}>
             {$t('import')}
-          </button>
-          <button className="home-btn" onClick={exportClick}>
+          </Button>
+          <Button variant="primary" className="ml-2" onClick={exportClick}>
             {$t('export')}
-          </button>
+          </Button>
           <button
-            className="hover:scale-110 transition-scale"
+            className="hover:scale-110 transition-scale ml-2"
             onClick={() => setShowUseTipModal(true)}
             aria-label={$t('descript')}
           >

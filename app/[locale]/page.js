@@ -1,17 +1,41 @@
+// only for migration period
+/* eslint-disable no-unused-vars */
+
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { basicSetup } from 'codemirror';
+import { EditorView } from '@codemirror/view';
+import { EditorState, EditorSelection } from '@codemirror/state';
+import { markdown } from '@codemirror/lang-markdown';
+import { autocompletion } from '@codemirror/autocomplete';
 
-import { marked as markedFactory } from 'lib/content-processor/markdown-process.js';
-import { textmath2laObj as textmath2laObjFactory } from 'lib/content-processor/math-process';
-import asciimath2mmlFactory from 'lib/content-processor/am2mml.js';
-import latex2mmlFactory from 'lib/content-processor/tex2mml.js';
-import mml2svg from 'lib/content-processor/mml2svg.js';
+import { marked as markedFactory } from '@/lib/content-processor/markdown-process.js';
+import { textmath2laObj as textmath2laObjFactory } from '@/lib/content-processor/math-process';
+import asciimath2mmlFactory from '@/lib/content-processor/am2mml.js';
+import latex2mmlFactory from '@/lib/content-processor/tex2mml.js';
+import mml2svg from '@/lib/content-processor/mml2svg.js';
+import latexs from '@/lib/latexs';
+
+const myCompletions = (context) => {
+  let word = context.matchBefore(new RegExp('\\\\\\w*'));
+  if (!word || (word.from == word.to && !context.explicit)) return null;
+  const options = latexs.map((item) => {
+    return {
+      label: item.latex,
+      type: 'text',
+      apply: item.latex,
+    };
+  });
+  return {
+    from: word.from,
+    options,
+  };
+};
 
 export default function Home() {
-  console.log('hit Home');
-  const [basic, setBasic] = useState(true);
+  const [basic, setBasic] = useState(false);
   const [data, setData] = useState('');
   const [showUseTipModal, setShowUseTipModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
@@ -23,9 +47,10 @@ export default function Home() {
   });
   const [selectionStart, setSelectionStart] = useState(-1);
   const [selectionEnd, setSelectionEnd] = useState(-1);
-  const [inputArea, setInputArea] = useState(null);
-  const [importFile, setImportFile] = useState(null);
-  const [codemirrorView, setCodemirrorView] = useState(null);
+
+  const codemirrorView = useRef(null);
+  const inputArea = useRef(null);
+  const importFile = useRef(null);
 
   const content = useMemo(() => {
     return data.split('\n').map((line) => {
@@ -68,29 +93,122 @@ export default function Home() {
 
   const EditIconsTab = () => <div>EditIconsTab</div>;
 
-  const insertMark = () => {
-    // Insert mark logic here
-  };
+  const createView = useCallback((content = '') => {
+    if (codemirrorView.current) {
+      codemirrorView.current.destroy();
+    }
+    const editorView = EditorView.theme({
+      '&': {
+        fontSize: '16px',
+        backgroundColor: 'white',
+        minHeight: '300px',
+        height: '100%',
+      },
+      '.cm-scroller': { overflow: 'auto' },
+    });
+    codemirrorView.current = new EditorView({
+      state: EditorState.create({
+        doc: content,
+        extensions: [
+          basicSetup,
+          autocompletion({
+            override: [myCompletions],
+          }),
+          markdown(),
+          EditorView.updateListener.of((update) => {
+            setData(update.view.state.doc.toString());
+          }),
+          editorView,
+          EditorView.lineWrapping,
+        ],
+      }),
+      parent: document.getElementById('codemirror'),
+    });
+  }, []);
 
-  const LaTeXSepConvert = (type) => {
+  useEffect(() => {
+    createView();
+  }, [createView]);
+
+  const insertMark = useCallback(() => {
+    if (basic) {
+      const target = inputArea.current;
+      const selectedText = target.value.slice(
+        target.selectionStart,
+        target.selectionEnd,
+      );
+      let LaTeX_delimiter_start = '\\(';
+      let LaTeX_delimiter_end = '\\)';
+      if (selecteds['LaTeX_delimiter'] === 'bracket') {
+        LaTeX_delimiter_start = '\\(';
+        LaTeX_delimiter_end = '\\)';
+      } else if (selecteds['LaTeX_delimiter'] === 'dollar') {
+        LaTeX_delimiter_start = '$';
+        LaTeX_delimiter_end = '$';
+      }
+      const startOffset = LaTeX_delimiter_start.length;
+      const endOffset = LaTeX_delimiter_end.length;
+      const content = `${LaTeX_delimiter_start}${selectedText}${LaTeX_delimiter_end}`;
+
+      setData(
+        data.slice(0, target.selectionStart) +
+          content +
+          data.slice(target.selectionEnd, data.length),
+      );
+
+      setSelectionStart(target.selectionStart + startOffset);
+      setSelectionEnd(target.selectionEnd + endOffset);
+      return;
+    }
+
+    let LaTeX_delimiter_start = '\\(';
+    let LaTeX_delimiter_end = '\\)';
+    if (selecteds['LaTeX_delimiter'] === 'bracket') {
+      LaTeX_delimiter_start = '\\(';
+      LaTeX_delimiter_end = '\\)';
+    } else if (selecteds['LaTeX_delimiter'] === 'dollar') {
+      LaTeX_delimiter_start = '$';
+      LaTeX_delimiter_end = '$';
+    }
+    const startOffset = LaTeX_delimiter_start.length;
+    const endOffset = LaTeX_delimiter_end.length;
+    const view = codemirrorView.current;
+    view.dispatch(
+      view.state.changeByRange((range) => {
+        return {
+          changes: [
+            { from: range.from, insert: LaTeX_delimiter_start },
+            { from: range.to, insert: LaTeX_delimiter_end },
+          ],
+          range: EditorSelection.range(
+            range.from + startOffset,
+            range.to + endOffset,
+          ),
+        };
+      }),
+    );
+    view.focus();
+  }, [basic, selecteds, data]);
+
+  const LaTeXSepConvert = useCallback((type) => {
     // LaTeX Sep Convert logic here
-  };
+  }, []);
 
-  const importClick = () => {
+  const importClick = useCallback(() => {
     // Import click logic here
-  };
+  }, []);
 
-  const exportClick = () => {
+  const exportClick = useCallback(() => {
     // Export click logic here
-  };
+  }, []);
 
-  const insertLatex = () => {
+  const insertLatex = useCallback(() => {
     // Insert LaTeX logic here
-  };
+  }, []);
 
-  const importAction = () => {
+  const importAction = useCallback(() => {
     // Import action logic here
-  };
+  }, []);
 
   const $t = useTranslations('Home');
 
@@ -129,12 +247,11 @@ export default function Home() {
         <div className="flex flex-1">
           {basic ? (
             <textarea
+              ref={inputArea}
               className="left-side-input-textarea flex-1 resize-none p-3 border border-bd1 overflow-y-scroll rounded-b-lg"
-              ref="inputArea"
               type="text"
               value={data}
               onChange={(e) => {
-                console.log('textarea onChange', e.target.value);
                 setData(e.target.value);
               }}
             />
@@ -145,8 +262,8 @@ export default function Home() {
             ></div>
           )}
           <input
+            ref={importFile}
             type="file"
-            ref="importFile"
             className="hidden"
             onChange={importAction}
           />

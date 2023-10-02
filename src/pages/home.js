@@ -24,6 +24,7 @@ import latex2mmlFactory from '@/lib/content-processor/tex2mml.js';
 import mml2svg from '@/lib/content-processor/mml2svg.js';
 
 import Button from '@/components/core/button';
+import EditIconsTab from '@/components/edit-icons-tab';
 
 import { myCompletions, bdconvert } from './helpers';
 
@@ -83,8 +84,6 @@ export default function Home() {
       display: selecteds['HTML_math_display'],
     })(data);
   }, [data, selecteds]);
-
-  const EditIconsTab = () => <div>EditIconsTab</div>;
 
   const createView = useCallback((content = '') => {
     if (codemirrorView.current) {

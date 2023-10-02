@@ -15,6 +15,7 @@ import { EditorView } from '@codemirror/view';
 import { EditorState, EditorSelection } from '@codemirror/state';
 import { markdown } from '@codemirror/lang-markdown';
 import { autocompletion } from '@codemirror/autocomplete';
+import { useTranslation } from 'react-i18next';
 
 import { marked as markedFactory } from '@/lib/content-processor/markdown-process.js';
 import { textmath2laObj as textmath2laObjFactory } from '@/lib/content-processor/math-process';
@@ -25,8 +26,6 @@ import mml2svg from '@/lib/content-processor/mml2svg.js';
 import Button from '@/components/core/button';
 
 import { myCompletions, bdconvert } from './helpers';
-
-const useTranslations = () => (key) => key;
 
 export default function Home() {
   const [basic, setBasic] = useState(false);
@@ -219,7 +218,7 @@ export default function Home() {
     // Import action logic here
   }, []);
 
-  const $t = useTranslations('Home');
+  const { t: $t } = useTranslation('home');
 
   return (
     <div className="home flex flex-wrap pt-16 md:pt-p2 h-screen w-screen overflow-x-hidden overflow-y-auto">

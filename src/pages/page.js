@@ -1,10 +1,15 @@
-// only for migration period
 /* eslint-disable no-unused-vars */
+// only for migration period
 
 'use client';
 
-import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 import { basicSetup } from 'codemirror';
 import { EditorView } from '@codemirror/view';
 import { EditorState, EditorSelection } from '@codemirror/state';
@@ -20,6 +25,8 @@ import mml2svg from '@/lib/content-processor/mml2svg.js';
 import Button from '@/components/core/button';
 
 import { myCompletions, bdconvert } from './helpers';
+
+const useTranslations = (key) => key;
 
 export default function Home() {
   const [basic, setBasic] = useState(false);

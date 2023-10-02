@@ -1,7 +1,7 @@
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createMemoryRouter } from 'react-router-dom';
 
-const router = createBrowserRouter([
+const router = createMemoryRouter([
   {
     path: '/',
     element: <div>Hello world!</div>,

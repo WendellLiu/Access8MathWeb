@@ -26,7 +26,7 @@ import Button from '@/components/core/button';
 
 import { myCompletions, bdconvert } from './helpers';
 
-const useTranslations = (key) => key;
+const useTranslations = () => (key) => key;
 
 export default function Home() {
   const [basic, setBasic] = useState(false);

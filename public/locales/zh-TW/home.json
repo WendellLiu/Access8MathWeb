@@ -24,10 +24,6 @@
     "greek_alphabet": "希臘字母",
     "other": "其他"
   },
-  "mains": {
-    "math": "數學",
-    "mark_down": "markdown"
-  },
   "markdown": {
     "bold": "粗體",
     "create_link": "創建連結",

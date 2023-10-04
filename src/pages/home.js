@@ -15,8 +15,8 @@ import { EditorView } from '@codemirror/view';
 import { EditorState, EditorSelection } from '@codemirror/state';
 import { markdown } from '@codemirror/lang-markdown';
 import { autocompletion } from '@codemirror/autocomplete';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '@/lib/i18n';
 import { marked as markedFactory } from '@/lib/content-processor/markdown-process.js';
 import { textmath2laObj as textmath2laObjFactory } from '@/lib/content-processor/math-process';
 import asciimath2mmlFactory from '@/lib/content-processor/am2mml.js';
@@ -217,43 +217,43 @@ export default function Home() {
     // Import action logic here
   }, []);
 
-  const { t: $t } = useTranslation('home');
+  const t = useTranslation('home');
 
   return (
     <div className="home flex flex-wrap pt-16 md:pt-p2 h-screen w-screen overflow-x-hidden overflow-y-auto">
       {/* Left side input panel */}
       <div className="w-2/4 p-p1 flex-basis-like-1/1 grow md:flex-1 bg-bg1 text-left pt-p1 pl-p3 pr-p3 flex flex-col">
         <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
-          {$t('editContent')}
+          {t('editContent')}
         </p>
         <div className="flex justify-end mb-m2 mt-8 md:mt-m1">
           <Button variant="primary" className="ml-2" onClick={insertMark}>
-            {$t('mark')}
+            {t('mark')}
           </Button>
           <Button
             variant="primary"
             className="ml-2"
             onClick={() => laTeXSepConvert('d2b')}
           >
-            {$t('dollar2bracket')}
+            {t('dollar2bracket')}
           </Button>
           <Button
             variant="primary"
             className="ml-2"
             onClick={() => laTeXSepConvert('b2d')}
           >
-            {$t('bracket2dollar')}
+            {t('bracket2dollar')}
           </Button>
           <Button variant="primary" className="ml-2" onClick={importClick}>
-            {$t('import')}
+            {t('import')}
           </Button>
           <Button variant="primary" className="ml-2" onClick={exportClick}>
-            {$t('export')}
+            {t('export')}
           </Button>
           <button
             className="hover:scale-110 transition-scale ml-2"
             onClick={() => setShowUseTipModal(true)}
-            aria-label={$t('descript')}
+            aria-label={t('descript')}
           >
             tipmodal
           </button>
@@ -293,11 +293,11 @@ export default function Home() {
             aria-level="1"
             className="text-2xl md:text-3xl w-100"
           >
-            {$t('result')}
+            {t('result')}
           </p>
           <button
             onClick={() => setShowSettingModal(true)}
-            aria-label={$t('useSetting')}
+            aria-label={t('useSetting')}
           >
             modal
           </button>

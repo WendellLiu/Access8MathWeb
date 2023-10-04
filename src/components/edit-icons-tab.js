@@ -1,47 +1,52 @@
 import React, { useState } from 'react';
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/react';
+import { Tab } from '@headlessui/react';
+
+import { useTranslation } from '@/lib/i18n';
 
 import { compare } from '@/lib/data-process';
-import latexs from '@/lib/latexs';
-import markdowns from '@/lib/markdowns';
-import tabs from '@/lib/tabs';
+// import latexs from '@/lib/latexs';
+// import markdowns from '@/lib/markdowns';
+// import tabs from '@/lib/tabs';
+//
+// import SvgIcon from '@/components/SvgIcon';
+//
+// const insertLatex = () => {};
 
-import SvgIcon from '@/components/SvgIcon';
-
-const insertLatex = () => {};
+const mains = ['math', 'mark_down'];
 
 const EditIconsTab = () => {
-  const mains = ['math', 'mark_down'];
-  const [mainActive, setMainActive] = useState(0);
+  const [mainActive, setMainActive] = useState(null);
   const [active, setActive] = useState(0);
-  const orderLatexs = latexs.sort(compare('order', 'asc'));
+  // const orderLatexs = latexs.sort(compare('order', 'asc'));
+  //
+  const t = useTranslation('tabs');
 
   return (
     <div>
       {/* Main category icons of symbols */}
-      <TabGroup as="div" onChange={(mainK) => setMainActive(mainK)}>
+      <Tab.Group as="div" onChange={(mainK) => setMainActive(mainK)}>
         <div className="flex padding_bottom">
-          <TabList
+          <Tab.List
             as="div"
             className="flex-auto xl:grow-0 flex flex-wrap xl:flex-nowrap bg-white"
           >
-            {mains.map((tab, mainK) => (
+            {mains.map((tab) => (
               <Tab
                 as="button"
-                key={mainK}
+                key={tab}
                 className={`category-icon w-24 h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:grow-0 xl:shrink-0 order mx-0.5 border bg-gray-50 text-sm text-center cursor-pointer transition-color ${
-                  mainActive === mainK ? 'main_active' : ''
+                  mainActive === tab ? 'main_active' : ''
                 }`}
-                onClick={() => setMainActive(mainK)}
+                onClick={() => setMainActive(tab)}
               >
-                {`default.mains.${tab}`}
+                {t(`mains.${tab}`)}
               </Tab>
             ))}
-          </TabList>
+          </Tab.List>
         </div>
-        {mainActive === 1 && (
+        {/* mainActive === 1 && (
           <div>
-            <TabPanels
+            <Tab.Panels
               as="div"
               className="bg-bg2 border border-gray-300 flex flex-wrap"
             >
@@ -66,14 +71,14 @@ const EditIconsTab = () => {
                   </Tab>
                 </button>
               ))}
-            </TabPanels>
+            </Tab.Panels>
           </div>
-        )}
-        {mainActive === 0 && (
+        ) */}
+        {/* mainActive === 0 && (
           <div>
-            <TabGroup as="div" onChange={(k) => setActive(k)}>
+            <Tab.Group as="div" onChange={(k) => setActive(k)}>
               <div className="flex">
-                <TabList
+                <Tab.List
                   as="div"
                   className="flex-auto flex flex-wrap xl:flex-nowrap bg-white"
                 >
@@ -100,15 +105,14 @@ const EditIconsTab = () => {
                       </div>
                     </Tab>
                   ))}
-                </TabList>
+                </Tab.List>
               </div>
-              {/* Sub category icons of symbols */}
-              <TabPanels
+              <Tab.Panels
                 as="div"
                 className="bg-bg2 border border-gray-300 flex flex-wrap"
               >
                 {tabs.map((tab, k) => (
-                  <TabPanel key={k}>
+                  <Tab.Panel key={k}>
                     {orderLatexs
                       .filter((latex) => latex.category === tab.toLowerCase())
                       .map((icon) => (
@@ -132,13 +136,13 @@ const EditIconsTab = () => {
                           </Tab>
                         </button>
                       ))}
-                  </TabPanel>
+                  </Tab.Panel>
                 ))}
-              </TabPanels>
-            </TabGroup>
+              </Tab.Panels>
+            </Tab.Group>
           </div>
-        )}
-      </TabGroup>
+        )*/}
+      </Tab.Group>
     </div>
   );
 };

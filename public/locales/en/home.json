@@ -50,10 +50,6 @@
     "greek_alphabet": "greek-alphabet",
     "other": "Other"
   },
-  "mains": {
-    "math": "math",
-    "mark_down": "mark down"
-  },
   "maths": {
     "bold": "bold",
     "create_link": "create_link",

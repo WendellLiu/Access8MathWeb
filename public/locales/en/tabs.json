@@ -2,5 +2,6 @@
   "main": {
     "math": "Math",
     "markdown": "Markdown"
-  }
+  },
+  "markdown": {}
 }

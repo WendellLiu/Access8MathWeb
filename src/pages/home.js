@@ -209,9 +209,47 @@ export default function Home() {
     link.click();
   }, [data]);
 
-  const insertLatex = useCallback(() => {
-    // Insert LaTeX logic here
-  }, []);
+  const insertLatex = useCallback(
+    ({ latex, offset }) => {
+      if (basic) {
+        const target = inputArea.current;
+        console.log({ target });
+        const content = latex;
+
+        setData(
+          data.slice(0, target.selectionStart) +
+            content +
+            data.slice(target.selectionEnd, data.length),
+        );
+
+        setSelectionStart(target.selectionStart + latex.length + offset);
+        setSelectionEnd(target.selectionStart + latex.length + offset);
+        return;
+      }
+
+      const view = codemirrorView.current;
+      view.dispatch(
+        view.state.changeByRange((range) => ({
+          changes: [
+            {
+              from: range.from,
+              insert: latex.slice(0, latex.length + offset),
+            },
+            {
+              from: range.to,
+              insert: latex.slice(latex.length + offset, latex.length),
+            },
+          ],
+          range: EditorSelection.range(
+            range.from + latex.length + offset,
+            range.from + latex.length + offset,
+          ),
+        })),
+      );
+      view.focus();
+    },
+    [data, basic],
+  );
 
   const importAction = useCallback(() => {
     // Import action logic here
@@ -258,7 +296,7 @@ export default function Home() {
             tipmodal
           </button>
         </div>
-        <EditIconsTab insert-latex={insertLatex} />
+        <EditIconsTab insertLatex={insertLatex} />
         <div className="flex flex-1">
           {basic ? (
             <textarea

@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@headlessui/react';
 
 import { useTranslation } from '@/lib/i18n';
 import mainTabList from '@/lib/tabs/main';
+import markdowns from '@/lib/tabs/markdowns';
 
 import { compare } from '@/lib/data-process';
 // import latexs from '@/lib/latexs';
 // import markdowns from '@/lib/markdowns';
 // import tabs from '@/lib/tabs';
 //
-// import SvgIcon from '@/components/SvgIcon';
 //
 // const insertLatex = () => {};
 
-const EditIconsTab = () => {
+const EditIconsTab = ({ insertLatex }) => {
   const [mainActive, setMainActive] = useState(null);
   const [active, setActive] = useState(0);
   // const orderLatexs = latexs.sort(compare('order', 'asc'));
@@ -43,20 +44,20 @@ const EditIconsTab = () => {
             ))}
           </Tab.List>
         </div>
-        {/* mainActive === 'markdown' && (
+        {mainActive === 'markdown' && (
           <div>
             <Tab.Panels
               as="div"
               className="bg-bg2 border border-gray-300 flex flex-wrap"
             >
-              {markdowns.map((icon) => (
+              {markdowns.map((tab) => (
                 <button
-                  key={icon.id}
+                  key={tab.id}
                   className="w-w5 h-w5 bg-white border group relative"
-                  aria-label={`default.markdown.${icon.id}`}
-                  onClick={() => insertLatex(icon)}
+                  aria-label={`default.markdown.${tab.id}`}
+                  onClick={() => insertLatex(tab)}
                 >
-                  <SvgIcon name={icon.id} size={51} />
+                  <tab.Icon size={51} />
                   <Tab
                     as="div"
                     className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
@@ -66,13 +67,13 @@ const EditIconsTab = () => {
                       top: '55px',
                     }}
                   >
-                    {`default.markdown.${icon.id}`}
+                    {`markdown.${tab.id}`}
                   </Tab>
                 </button>
               ))}
             </Tab.Panels>
           </div>
-        ) */}
+        )}
         {/* mainActive === 0 && (
           <div>
             <Tab.Group as="div" onChange={(k) => setActive(k)}>
@@ -144,6 +145,10 @@ const EditIconsTab = () => {
       </Tab.Group>
     </div>
   );
+};
+
+EditIconsTab.propTypes = {
+  insertLatex: PropTypes.func,
 };
 
 export default EditIconsTab;

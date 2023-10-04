@@ -3,5 +3,34 @@
     "math": "數學",
     "markdown": "Markdown"
   },
-  "markdown": {}
+  "markdown": {
+    "bold": "粗體",
+    "create_link": "創建連結",
+    "generic_list": "通用清單",
+    "heading1": "標題1",
+    "heading2": "標題2",
+    "heading3": "標題3",
+    "heading4": "標題4",
+    "heading5": "標題5",
+    "heading6": "標題6",
+    "horizontal_rule": "分隔線",
+    "insert_image": "插入圖片",
+    "italic": "斜體",
+    "numbered_list": "編號清單",
+    "quote": "引用",
+    "table": "表格"
+  },
+  "categorys": {
+    "common": "常見",
+    "operator": "運算子",
+    "relation": "關係",
+    "arrow": "箭頭",
+    "two_dimension": "2維",
+    "set": "集合",
+    "logic": "邏輯",
+    "lower_greek_alphabet": "小寫希臘字母",
+    "upper_greek_alphabet": "大寫希臘字母",
+    "greek_alphabet": "希臘字母",
+    "other": "其他"
+  }
 }

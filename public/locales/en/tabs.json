@@ -3,5 +3,16 @@
     "math": "Math",
     "markdown": "Markdown"
   },
-  "markdown": {}
+  "markdown": {},
+  "categorys": {
+    "common": "Common",
+    "operator": "Operator",
+    "relation": "Relation",
+    "arrow": "Arrow",
+    "two_dimension": "2-Dimension",
+    "set": "set",
+    "logic": "logic",
+    "greek_alphabet": "greek-alphabet",
+    "other": "Other"
+  }
 }

@@ -9,21 +9,20 @@ import markdowns from '@/lib/tabs/markdowns';
 import { compare } from '@/lib/data-process';
 // import latexs from '@/lib/latexs';
 // import markdowns from '@/lib/markdowns';
-// import tabs from '@/lib/tabs';
+import mathTabList from '@/lib/tabs/math';
 //
 //
 // const insertLatex = () => {};
 
 const EditIconsTab = ({ insertLatex }) => {
   const [mainActive, setMainActive] = useState('markdown');
-  const [active, setActive] = useState(0);
+  const [mathTabActive, setMathTabActive] = useState('common');
   // const orderLatexs = latexs.sort(compare('order', 'asc'));
   //
   const t = useTranslation('tabs');
 
   return (
     <div>
-      {/* Main category icons of symbols */}
       <Tab.Group as="div">
         <div className="flex padding_bottom">
           <Tab.List
@@ -54,7 +53,7 @@ const EditIconsTab = ({ insertLatex }) => {
                 <button
                   key={tab.id}
                   className="w-w5 h-w5 bg-white border group relative"
-                  aria-label={`default.markdown.${tab.id}`}
+                  aria-label={t(`markdown.${tab.id}`)}
                   onClick={() => insertLatex(tab)}
                 >
                   <tab.Icon size={51} />
@@ -67,32 +66,32 @@ const EditIconsTab = ({ insertLatex }) => {
                       top: '55px',
                     }}
                   >
-                    {`markdown.${tab.id}`}
+                    {t(`markdown.${tab.id}`)}
                   </Tab>
                 </button>
               ))}
             </Tab.Panels>
           </div>
         )}
-        {/* mainActive === 0 && (
+        {mainActive === 'math' && (
           <div>
-            <Tab.Group as="div" onChange={(k) => setActive(k)}>
+            <Tab.Group as="div" onChange={(k) => setMathTabActive(k)}>
               <div className="flex">
                 <Tab.List
                   as="div"
                   className="flex-auto flex flex-wrap xl:flex-nowrap bg-white"
                 >
-                  {tabs.map((tab, k) => (
+                  {mathTabList.map((tab) => (
                     <Tab
                       as="button"
-                      key={k}
-                      aria-label={`default.categorys.${tab}`}
+                      key={tab.id}
+                      aria-label={t(`categorys.${tab.id}`)}
                       className={`group relative category-icon h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:shrink-0 order mx-0.5 border bg-gray-50 cursor-pointer transition-color ${
-                        active === k ? 'active' : ''
+                        mathTabActive === tab.id ? 'active' : ''
                       }`}
-                      onClick={() => setActive(k)}
+                      onClick={() => setMathTabActive(tab.id)}
                     >
-                      <SvgIcon name={tab} size={48} />
+                      <tab.Icon size={48} />
                       <div
                         className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
                         style={{
@@ -101,13 +100,13 @@ const EditIconsTab = ({ insertLatex }) => {
                           top: '55px',
                         }}
                       >
-                        {`default.categorys.${tab}`}
+                        {t(`categorys.${tab.id}`)}
                       </div>
                     </Tab>
                   ))}
                 </Tab.List>
               </div>
-              <Tab.Panels
+              {/* <Tab.Panels
                 as="div"
                 className="bg-bg2 border border-gray-300 flex flex-wrap"
               >
@@ -138,10 +137,10 @@ const EditIconsTab = ({ insertLatex }) => {
                       ))}
                   </Tab.Panel>
                 ))}
-              </Tab.Panels>
+              </Tab.Panels> */}
             </Tab.Group>
           </div>
-        )*/}
+        )}
       </Tab.Group>
     </div>
   );

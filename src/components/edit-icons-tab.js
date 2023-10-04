@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 
 import { useTranslation } from '@/lib/i18n';
+import mainTabList from '@/lib/tabs/main';
 
 import { compare } from '@/lib/data-process';
 // import latexs from '@/lib/latexs';
@@ -11,8 +12,6 @@ import { compare } from '@/lib/data-process';
 // import SvgIcon from '@/components/SvgIcon';
 //
 // const insertLatex = () => {};
-
-const mains = ['math', 'mark_down'];
 
 const EditIconsTab = () => {
   const [mainActive, setMainActive] = useState(null);
@@ -30,21 +29,21 @@ const EditIconsTab = () => {
             as="div"
             className="flex-auto xl:grow-0 flex flex-wrap xl:flex-nowrap bg-white"
           >
-            {mains.map((tab) => (
+            {mainTabList.map(({ id }) => (
               <Tab
                 as="button"
-                key={tab}
+                key={id}
                 className={`category-icon w-24 h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:grow-0 xl:shrink-0 order mx-0.5 border bg-gray-50 text-sm text-center cursor-pointer transition-color ${
-                  mainActive === tab ? 'main_active' : ''
+                  mainActive === id ? 'main_active' : ''
                 }`}
-                onClick={() => setMainActive(tab)}
+                onClick={() => setMainActive(id)}
               >
-                {t(`mains.${tab}`)}
+                {t(`main.${id}`)}
               </Tab>
             ))}
           </Tab.List>
         </div>
-        {/* mainActive === 1 && (
+        {/* mainActive === 'markdown' && (
           <div>
             <Tab.Panels
               as="div"

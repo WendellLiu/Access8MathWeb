@@ -1,6 +1,6 @@
 {
-  "mains": {
+  "main": {
     "math": "數學",
-    "mark_down": "markdown"
+    "markdown": "Markdown"
   }
 }

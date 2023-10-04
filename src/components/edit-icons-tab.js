@@ -6,18 +6,20 @@ import { useTranslation } from '@/lib/i18n';
 import mainTabList from '@/lib/tabs/main';
 import markdowns from '@/lib/tabs/markdowns';
 
-import { compare } from '@/lib/data-process';
-// import latexs from '@/lib/latexs';
+// import { compare } from '@/lib/data-process';
 // import markdowns from '@/lib/markdowns';
 import mathTabList from '@/lib/tabs/math';
-//
-//
-// const insertLatex = () => {};
+
+const mathTabListById = mathTabList.reduce((acc, currentTab) => {
+  return {
+    ...acc,
+    [currentTab.id]: currentTab,
+  };
+}, {});
 
 const EditIconsTab = ({ insertLatex }) => {
   const [mainActive, setMainActive] = useState('markdown');
   const [mathTabActive, setMathTabActive] = useState('common');
-  // const orderLatexs = latexs.sort(compare('order', 'asc'));
   //
   const t = useTranslation('tabs');
 
@@ -75,7 +77,7 @@ const EditIconsTab = ({ insertLatex }) => {
         )}
         {mainActive === 'math' && (
           <div>
-            <Tab.Group as="div" onChange={(k) => setMathTabActive(k)}>
+            <Tab.Group as="div">
               <div className="flex">
                 <Tab.List
                   as="div"
@@ -106,38 +108,36 @@ const EditIconsTab = ({ insertLatex }) => {
                   ))}
                 </Tab.List>
               </div>
-              {/* <Tab.Panels
-                as="div"
-                className="bg-bg2 border border-gray-300 flex flex-wrap"
-              >
-                {tabs.map((tab, k) => (
-                  <Tab.Panel key={k}>
-                    {orderLatexs
-                      .filter((latex) => latex.category === tab.toLowerCase())
-                      .map((icon) => (
-                        <button
-                          key={icon.id}
-                          className="w-w5 h-w5 bg-white border group relative"
-                          aria-label={`default.latexs.${icon.id}`}
-                          onClick={() => insertLatex(icon)}
+              {
+                <Tab.Panels
+                  as="div"
+                  className="bg-bg2 border border-gray-300 flex flex-wrap"
+                >
+                  <Tab.Panel>
+                    {mathTabListById[mathTabActive].subTabs.map((tab) => (
+                      <button
+                        key={tab.id}
+                        className="w-w5 h-w5 bg-white border group relative"
+                        aria-label={t(`latexs.${tab.id}`)}
+                        onClick={() => insertLatex(tab)}
+                      >
+                        <tab.Icon size={51} />
+                        <Tab
+                          as="div"
+                          className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
+                          style={{
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            top: '55px',
+                          }}
                         >
-                          <SvgIcon name={icon.id} size={51} />
-                          <Tab
-                            as="div"
-                            className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
-                            style={{
-                              left: '50%',
-                              transform: 'translateX(-50%)',
-                              top: '55px',
-                            }}
-                          >
-                            {`default.latexs.${icon.id}`}
-                          </Tab>
-                        </button>
-                      ))}
+                          {t(`latexs.${tab.id}`)}
+                        </Tab>
+                      </button>
+                    ))}
                   </Tab.Panel>
-                ))}
-              </Tab.Panels> */}
+                </Tab.Panels>
+              }
             </Tab.Group>
           </div>
         )}

@@ -9,10 +9,13 @@ import { ReactComponent as Other } from '@/components/svg/math/other.svg';
 import { ReactComponent as UpperGreekAlphabet } from '@/components/svg/math/upper_greek_alphabet.svg';
 import { ReactComponent as LowerGreekAlphabet } from '@/components/svg/math/lower_greek_alphabet.svg';
 
-const latexs = [
+import commonList from './common';
+
+const mathTabList = [
   {
     id: 'common',
     Icon: Common,
+    subTabs: commonList,
   },
   {
     id: 'operator',
@@ -52,4 +55,4 @@ const latexs = [
   },
 ];
 
-export default latexs;
+export default mathTabList;

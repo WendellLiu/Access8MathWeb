@@ -15,7 +15,7 @@ import { compare } from '@/lib/data-process';
 // const insertLatex = () => {};
 
 const EditIconsTab = ({ insertLatex }) => {
-  const [mainActive, setMainActive] = useState(null);
+  const [mainActive, setMainActive] = useState('markdown');
   const [active, setActive] = useState(0);
   // const orderLatexs = latexs.sort(compare('order', 'asc'));
   //
@@ -24,7 +24,7 @@ const EditIconsTab = ({ insertLatex }) => {
   return (
     <div>
       {/* Main category icons of symbols */}
-      <Tab.Group as="div" onChange={(mainK) => setMainActive(mainK)}>
+      <Tab.Group as="div">
         <div className="flex padding_bottom">
           <Tab.List
             as="div"

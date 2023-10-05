@@ -264,7 +264,7 @@ export default function Home() {
         <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
           {t('editContent')}
         </p>
-        <div className="flex justify-end mb-m2 mt-8 md:mt-m1">
+        <div className="flex justify-end mb-4 mt-8 md:mt-m1">
           <Button variant="primary" className="ml-2" onClick={insertMark}>
             {t('mark')}
           </Button>

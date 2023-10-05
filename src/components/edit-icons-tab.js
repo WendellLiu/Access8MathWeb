@@ -22,7 +22,7 @@ const EditIconsTab = ({ insertLatex }) => {
         selectedIndex={selectedMainTabIndex}
         onChange={setSelectedMainTabIndex}
       >
-        <div className="flex padding_bottom">
+        <div className="flex padding_bottom mb-2">
           <Tab.List
             as="div"
             className="flex-auto xl:grow-0 flex flex-wrap xl:flex-nowrap bg-white"
@@ -51,7 +51,7 @@ const EditIconsTab = ({ insertLatex }) => {
                 selectedIndex={selectedMathTabIndex}
                 onChange={setSelectedMathTabIndex}
               >
-                <div className="flex">
+                <div className="flex mb-4">
                   <Tab.List
                     as="div"
                     className="flex-auto flex flex-wrap xl:flex-nowrap bg-white"
@@ -65,7 +65,7 @@ const EditIconsTab = ({ insertLatex }) => {
                           selectedMathTabIndex === mathTabIndex ? 'active' : ''
                         }`}
                       >
-                        <tab.Icon size={48} />
+                        <tab.Icon width={48} height={48} />
                         <div
                           className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
                           style={{
@@ -96,7 +96,7 @@ const EditIconsTab = ({ insertLatex }) => {
                               aria-label={t(`latexs.${subTab.id}`)}
                               onClick={() => insertLatex(subTab)}
                             >
-                              <subTab.Icon size={51} />
+                              <subTab.Icon width={50} height={50} />
                               <Tab
                                 as="div"
                                 className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
@@ -124,7 +124,7 @@ const EditIconsTab = ({ insertLatex }) => {
                   aria-label={t(`markdown.${tab.id}`)}
                   onClick={() => insertLatex(tab)}
                 >
-                  <tab.Icon size={51} />
+                  <tab.Icon width={50} height={50} />
                   <Tab
                     as="div"
                     className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"

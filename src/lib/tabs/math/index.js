@@ -13,6 +13,7 @@ import commonList from './common';
 import operatorList from './operator';
 import relationList from './relation';
 import logicList from './logic';
+import arrowList from './arrow';
 
 const mathTabList = [
   {
@@ -38,6 +39,7 @@ const mathTabList = [
   {
     id: 'arrow',
     Icon: Arrow,
+    subTabs: arrowList,
   },
   {
     id: 'two_dimension',

@@ -1,53 +1,5 @@
 ﻿const latexs = [
   {
-    id: 'leftarrow',
-    latex: '\\leftarrow',
-    offset: 0,
-    category: 'arrow',
-    shortcut: -1,
-    order: 0,
-  },
-  {
-    id: 'rightarrow',
-    latex: '\\rightarrow',
-    offset: 0,
-    category: 'arrow',
-    shortcut: -1,
-    order: 1,
-  },
-  {
-    id: 'leftrightarrow',
-    latex: '\\leftrightarrow',
-    offset: 0,
-    category: 'arrow',
-    shortcut: -1,
-    order: 2,
-  },
-  {
-    id: 'uparrow',
-    latex: '\\uparrow',
-    offset: 0,
-    category: 'arrow',
-    shortcut: -1,
-    order: 3,
-  },
-  {
-    id: 'downarrow',
-    latex: '\\downarrow',
-    offset: 0,
-    category: 'arrow',
-    shortcut: -1,
-    order: 4,
-  },
-  {
-    id: 'updownarrow',
-    latex: '\\updownarrow',
-    offset: 0,
-    category: 'arrow',
-    shortcut: -1,
-    order: 5,
-  },
-  {
     id: 'matrix2X2',
     latex:
       '\\left [ \\begin{matrix} {} &{} \\\\ {} &{} \\end{matrix} \\right ]',

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@headlessui/react';
 
@@ -10,25 +10,25 @@ import { compare } from '@/lib/data-process';
 import mathTabList from '@/lib/tabs/math';
 
 const EditIconsTab = ({ insertLatex }) => {
-  const [mainActive, setMainActive] = useState('markdown');
-  const [mathTabActive, setMathTabActive] = useState(null);
+  const [selectedMainTabIndex, setSelectedMainTabIndex] = useState(null);
+  const [selectedMathTabIndex, setSelectedMathTabIndex] = useState(null);
 
   const t = useTranslation('tabs');
 
   return (
     <div>
-      <Tab.Group as="div">
+      <Tab.Group as="div" onChange={setSelectedMainTabIndex}>
         <div className="flex padding_bottom">
           <Tab.List
             as="div"
             className="flex-auto xl:grow-0 flex flex-wrap xl:flex-nowrap bg-white"
           >
-            {mainTabList.map(({ id }) => (
+            {mainTabList.map(({ id, mainTabIndex }) => (
               <Tab
                 as="button"
                 key={id}
                 className={`category-icon w-24 h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:grow-0 xl:shrink-0 order mx-0.5 border bg-gray-50 text-sm text-center cursor-pointer transition-color ${
-                  mainActive === id ? 'main_active' : ''
+                  selectedMainTabIndex === mainTabIndex ? 'main_active' : ''
                 }`}
               >
                 {t(`main.${id}`)}
@@ -42,19 +42,19 @@ const EditIconsTab = ({ insertLatex }) => {
             className="bg-bg2 border border-gray-300 flex flex-wrap"
           >
             <Tab.Panel>
-              <Tab.Group as="div">
+              <Tab.Group as="div" onChange={setSelectedMathTabIndex}>
                 <div className="flex">
                   <Tab.List
                     as="div"
                     className="flex-auto flex flex-wrap xl:flex-nowrap bg-white"
                   >
-                    {mathTabList.map((tab) => (
+                    {mathTabList.map((tab, mathTabIndex) => (
                       <Tab
                         as="button"
                         key={tab.id}
                         aria-label={t(`categorys.${tab.id}`)}
                         className={`group relative category-icon h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:shrink-0 order mx-0.5 border bg-gray-50 cursor-pointer transition-color ${
-                          mathTabActive === tab.id ? 'active' : ''
+                          selectedMathTabIndex === mathTabIndex ? 'active' : ''
                         }`}
                       >
                         <tab.Icon size={48} />
@@ -133,7 +133,6 @@ const EditIconsTab = ({ insertLatex }) => {
             </Tab.Panel>
           </Tab.Panels>
         </div>
-        {mainActive === 'math' && <div></div>}
       </Tab.Group>
     </div>
   );

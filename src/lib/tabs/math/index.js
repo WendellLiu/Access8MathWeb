@@ -15,6 +15,7 @@ import relationList from './relation';
 import logicList from './logic';
 import arrowList from './arrow';
 import twoDimensionList from './two-dimension';
+import setList from './set';
 
 const mathTabList = [
   {
@@ -50,6 +51,7 @@ const mathTabList = [
   {
     id: 'set',
     Icon: SetIcon,
+    subTabs: setList,
   },
   {
     id: 'other',

@@ -1,3 +1,28 @@
+import { ReactComponent as AlphaLower } from '@/components/svg/lower-greek-alphabet/alpha-lower.svg';
+import { ReactComponent as BetaLower } from '@/components/svg/lower-greek-alphabet/beta-lower.svg';
+import { ReactComponent as ChiLower } from '@/components/svg/lower-greek-alphabet/chi-lower.svg';
+import { ReactComponent as DeltaLower } from '@/components/svg/lower-greek-alphabet/delta-lower.svg';
+import { ReactComponent as EpsilonLower } from '@/components/svg/lower-greek-alphabet/epsilon-lower.svg';
+import { ReactComponent as EtaLower } from '@/components/svg/lower-greek-alphabet/eta-lower.svg';
+import { ReactComponent as GammaLower } from '@/components/svg/lower-greek-alphabet/gamma-lower.svg';
+import { ReactComponent as IotaLower } from '@/components/svg/lower-greek-alphabet/iota-lower.svg';
+import { ReactComponent as KappaLower } from '@/components/svg/lower-greek-alphabet/kappa-lower.svg';
+import { ReactComponent as LambdaLower } from '@/components/svg/lower-greek-alphabet/lambda-lower.svg';
+import { ReactComponent as MuLower } from '@/components/svg/lower-greek-alphabet/mu-lower.svg';
+import { ReactComponent as NuLower } from '@/components/svg/lower-greek-alphabet/nu-lower.svg';
+import { ReactComponent as OmegaLower } from '@/components/svg/lower-greek-alphabet/omega-lower.svg';
+import { ReactComponent as OmicronLower } from '@/components/svg/lower-greek-alphabet/omicron-lower.svg';
+import { ReactComponent as PhiLower } from '@/components/svg/lower-greek-alphabet/phi-lower.svg';
+import { ReactComponent as PiLower } from '@/components/svg/lower-greek-alphabet/pi-lower.svg';
+import { ReactComponent as PsiLower } from '@/components/svg/lower-greek-alphabet/psi-lower.svg';
+import { ReactComponent as RhoLower } from '@/components/svg/lower-greek-alphabet/rho-lower.svg';
+import { ReactComponent as SigmaLower } from '@/components/svg/lower-greek-alphabet/sigma-lower.svg';
+import { ReactComponent as TauLower } from '@/components/svg/lower-greek-alphabet/tau-lower.svg';
+import { ReactComponent as ThetaLower } from '@/components/svg/lower-greek-alphabet/theta-lower.svg';
+import { ReactComponent as UpsilonLower } from '@/components/svg/lower-greek-alphabet/upsilon-lower.svg';
+import { ReactComponent as XiLower } from '@/components/svg/lower-greek-alphabet/xi-lower.svg';
+import { ReactComponent as ZetaLower } from '@/components/svg/lower-greek-alphabet/zeta-lower.svg';
+
 const lowerGreekAlphabet = [
   {
     id: 'alpha-lower',
@@ -6,6 +31,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'a',
     order: 0,
+    Icon: AlphaLower,
   },
   {
     id: 'beta-lower',
@@ -14,6 +40,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'b',
     order: 1,
+    Icon: BetaLower,
   },
   {
     id: 'theta-lower',
@@ -22,6 +49,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'c',
     order: 7,
+    Icon: ThetaLower,
   },
   {
     id: 'delta-lower',
@@ -30,6 +58,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'd',
     order: 3,
+    Icon: DeltaLower,
   },
   {
     id: 'epsilon-lower',
@@ -38,6 +67,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'e',
     order: 4,
+    Icon: EpsilonLower,
   },
   {
     id: 'phi-lower',
@@ -46,6 +76,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'f',
     order: 20,
+    Icon: PhiLower,
   },
   {
     id: 'gamma-lower',
@@ -54,6 +85,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'g',
     order: 2,
+    Icon: GammaLower,
   },
   {
     id: 'eta-lower',
@@ -62,6 +94,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'h',
     order: 6,
+    Icon: EtaLower,
   },
   {
     id: 'iota-lower',
@@ -70,6 +103,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'i',
     order: 8,
+    Icon: IotaLower,
   },
   {
     id: 'kappa-lower',
@@ -78,6 +112,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'k',
     order: 9,
+    Icon: KappaLower,
   },
   {
     id: 'lambda-lower',
@@ -86,6 +121,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'l',
     order: 10,
+    Icon: LambdaLower,
   },
   {
     id: 'mu-lower',
@@ -94,6 +130,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'm',
     order: 11,
+    Icon: MuLower,
   },
   {
     id: 'nu-lower',
@@ -102,6 +139,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'n',
     order: 12,
+    Icon: NuLower,
   },
   {
     id: 'omicron-lower',
@@ -110,6 +148,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'o',
     order: 14,
+    Icon: OmicronLower,
   },
   {
     id: 'pi-lower',
@@ -118,6 +157,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'p',
     order: 15,
+    Icon: PiLower,
   },
   {
     id: 'rho-lower',
@@ -126,6 +166,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'r',
     order: 16,
+    Icon: RhoLower,
   },
   {
     id: 'sigma-lower',
@@ -134,7 +175,9 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 's',
     order: 17,
+    Icon: SigmaLower,
   },
+
   {
     id: 'tau-lower',
     latex: '\\tau ',
@@ -142,6 +185,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 't',
     order: 18,
+    Icon: TauLower,
   },
   {
     id: 'upsilon-lower',
@@ -150,6 +194,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'u',
     order: 19,
+    Icon: UpsilonLower,
   },
   {
     id: 'psi-lower',
@@ -158,6 +203,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'v',
     order: 22,
+    Icon: PsiLower,
   },
   {
     id: 'omega-lower',
@@ -166,6 +212,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'w',
     order: 23,
+    Icon: OmegaLower,
   },
   {
     id: 'xi-lower',
@@ -174,6 +221,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'y',
     order: 13,
+    Icon: XiLower,
   },
   {
     id: 'chi-lower',
@@ -182,6 +230,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'x',
     order: 21,
+    Icon: ChiLower,
   },
   {
     id: 'zeta-lower',
@@ -190,6 +239,7 @@ const lowerGreekAlphabet = [
     category: 'lower_greek_alphabet',
     shortcut: 'z',
     order: 5,
+    Icon: ZetaLower,
   },
 ];
 

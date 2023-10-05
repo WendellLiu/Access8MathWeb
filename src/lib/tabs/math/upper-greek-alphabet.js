@@ -11,7 +11,7 @@ import { ReactComponent as LambdaUpper } from '@/components/svg/upper-greek-alph
 import { ReactComponent as MuUpper } from '@/components/svg/upper-greek-alphabet/mu-upper.svg';
 import { ReactComponent as NuUpper } from '@/components/svg/upper-greek-alphabet/nu-upper.svg';
 import { ReactComponent as OmegaUpper } from '@/components/svg/upper-greek-alphabet/omega-upper.svg';
-import { ReactComponent as omicronUpper } from '@/components/svg/upper-greek-alphabet/omicron-upper.svg';
+import { ReactComponent as OmicronUpper } from '@/components/svg/upper-greek-alphabet/omicron-upper.svg';
 import { ReactComponent as PhiUpper } from '@/components/svg/upper-greek-alphabet/phi-upper.svg';
 import { ReactComponent as PiUpper } from '@/components/svg/upper-greek-alphabet/pi-upper.svg';
 import { ReactComponent as PsiUpper } from '@/components/svg/upper-greek-alphabet/psi-upper.svg';
@@ -148,7 +148,7 @@ const upperGreekAlphabet = [
     category: 'upper_greek_alphabet',
     shortcut: 'O',
     order: 14,
-    Icon: omicronUpper,
+    Icon: OmicronUpper,
   },
   {
     id: 'pi-upper',

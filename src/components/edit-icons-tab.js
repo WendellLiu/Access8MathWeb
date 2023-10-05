@@ -17,7 +17,11 @@ const EditIconsTab = ({ insertLatex }) => {
 
   return (
     <div>
-      <Tab.Group as="div" onChange={setSelectedMainTabIndex}>
+      <Tab.Group
+        as="div"
+        selectedIndex={selectedMainTabIndex}
+        onChange={setSelectedMainTabIndex}
+      >
         <div className="flex padding_bottom">
           <Tab.List
             as="div"
@@ -42,7 +46,11 @@ const EditIconsTab = ({ insertLatex }) => {
             className="bg-bg2 border border-gray-300 flex flex-wrap"
           >
             <Tab.Panel>
-              <Tab.Group as="div" onChange={setSelectedMathTabIndex}>
+              <Tab.Group
+                as="div"
+                selectedIndex={selectedMathTabIndex}
+                onChange={setSelectedMathTabIndex}
+              >
                 <div className="flex">
                   <Tab.List
                     as="div"

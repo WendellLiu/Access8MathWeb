@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@headlessui/react';
 
@@ -6,7 +6,7 @@ import { useTranslation } from '@/lib/i18n';
 import mainTabList from '@/lib/tabs/main';
 import markdowns from '@/lib/tabs/markdowns';
 
-// import { compare } from '@/lib/data-process';
+import { compare } from '@/lib/data-process';
 // import markdowns from '@/lib/markdowns';
 import mathTabList from '@/lib/tabs/math';
 
@@ -19,9 +19,14 @@ const mathTabListById = mathTabList.reduce((acc, currentTab) => {
 
 const EditIconsTab = ({ insertLatex }) => {
   const [mainActive, setMainActive] = useState('markdown');
-  const [mathTabActive, setMathTabActive] = useState('common');
-  //
+  const [mathTabActive, setMathTabActive] = useState(null);
+
   const t = useTranslation('tabs');
+
+  const mathSubTabList = useMemo(() => {
+    const tabList = mathTabListById[mathTabActive]?.subTabs || [];
+    return tabList.sort(compare('order', 'asc'));
+  }, [mathTabActive]);
 
   return (
     <div>
@@ -114,27 +119,29 @@ const EditIconsTab = ({ insertLatex }) => {
                   className="bg-bg2 border border-gray-300 flex flex-wrap"
                 >
                   <Tab.Panel>
-                    {mathTabListById[mathTabActive].subTabs.map((tab) => (
-                      <button
-                        key={tab.id}
-                        className="w-w5 h-w5 bg-white border group relative"
-                        aria-label={t(`latexs.${tab.id}`)}
-                        onClick={() => insertLatex(tab)}
-                      >
-                        <tab.Icon size={51} />
-                        <Tab
-                          as="div"
-                          className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
-                          style={{
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            top: '55px',
-                          }}
+                    {mathSubTabList.map((tab) => {
+                      return (
+                        <button
+                          key={tab.id}
+                          className="w-w5 h-w5 bg-white border group relative"
+                          aria-label={t(`latexs.${tab.id}`)}
+                          onClick={() => insertLatex(tab)}
                         >
-                          {t(`latexs.${tab.id}`)}
-                        </Tab>
-                      </button>
-                    ))}
+                          <tab.Icon size={51} />
+                          <Tab
+                            as="div"
+                            className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
+                            style={{
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              top: '55px',
+                            }}
+                          >
+                            {t(`latexs.${tab.id}`)}
+                          </Tab>
+                        </button>
+                      );
+                    })}
                   </Tab.Panel>
                 </Tab.Panels>
               }

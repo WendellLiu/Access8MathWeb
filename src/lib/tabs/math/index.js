@@ -10,6 +10,7 @@ import { ReactComponent as UpperGreekAlphabet } from '@/components/svg/math/uppe
 import { ReactComponent as LowerGreekAlphabet } from '@/components/svg/math/lower_greek_alphabet.svg';
 
 import commonList from './common';
+import operatorList from './operator';
 
 const mathTabList = [
   {
@@ -20,6 +21,7 @@ const mathTabList = [
   {
     id: 'operator',
     Icon: Operator,
+    subTabs: operatorList,
   },
   {
     id: 'relation',

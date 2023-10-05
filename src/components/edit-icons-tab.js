@@ -7,26 +7,13 @@ import mainTabList from '@/lib/tabs/main';
 import markdowns from '@/lib/tabs/markdowns';
 
 import { compare } from '@/lib/data-process';
-// import markdowns from '@/lib/markdowns';
 import mathTabList from '@/lib/tabs/math';
-
-const mathTabListById = mathTabList.reduce((acc, currentTab) => {
-  return {
-    ...acc,
-    [currentTab.id]: currentTab,
-  };
-}, {});
 
 const EditIconsTab = ({ insertLatex }) => {
   const [mainActive, setMainActive] = useState('markdown');
   const [mathTabActive, setMathTabActive] = useState(null);
 
   const t = useTranslation('tabs');
-
-  const mathSubTabList = useMemo(() => {
-    const tabList = mathTabListById[mathTabActive]?.subTabs || [];
-    return tabList.sort(compare('order', 'asc'));
-  }, [mathTabActive]);
 
   return (
     <div>
@@ -43,7 +30,6 @@ const EditIconsTab = ({ insertLatex }) => {
                 className={`category-icon w-24 h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:grow-0 xl:shrink-0 order mx-0.5 border bg-gray-50 text-sm text-center cursor-pointer transition-color ${
                   mainActive === id ? 'main_active' : ''
                 }`}
-                onClick={() => setMainActive(id)}
               >
                 {t(`main.${id}`)}
               </Tab>
@@ -70,7 +56,6 @@ const EditIconsTab = ({ insertLatex }) => {
                         className={`group relative category-icon h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:shrink-0 order mx-0.5 border bg-gray-50 cursor-pointer transition-color ${
                           mathTabActive === tab.id ? 'active' : ''
                         }`}
-                        onClick={() => setMathTabActive(tab.id)}
                       >
                         <tab.Icon size={48} />
                         <div

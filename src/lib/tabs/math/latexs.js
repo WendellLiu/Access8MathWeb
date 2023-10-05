@@ -1,41 +1,5 @@
 ﻿const latexs = [
   {
-    id: 'matrix2X2',
-    latex:
-      '\\left [ \\begin{matrix} {} &{} \\\\ {} &{} \\end{matrix} \\right ]',
-    offset: -37,
-    category: 'two_dimension',
-    shortcut: -1,
-    order: 0,
-  },
-  {
-    id: 'matrix3X3',
-    latex:
-      '\\left [ \\begin{matrix} {} &{} &{} \\\\ {} &{} &{} \\\\ {} &{} &{} \\end{matrix} \\right ]',
-    offset: -59,
-    category: 'two_dimension',
-    shortcut: -1,
-    order: 1,
-  },
-  {
-    id: 'determinant2X2',
-    latex:
-      '\\left | \\begin{array} {cc} {} &{} \\\\ {} &{} \\end{array} \\right |',
-    offset: -36,
-    category: 'two_dimension',
-    shortcut: -1,
-    order: 2,
-  },
-  {
-    id: 'determinant3X3',
-    latex:
-      '\\left | \\begin{array} {ccc} {} &{} &{} \\\\ {} &{} &{} \\\\ {} &{} &{} \\end{array} \\right |',
-    offset: -58,
-    category: 'two_dimension',
-    shortcut: -1,
-    order: 3,
-  },
-  {
     id: 'in',
     latex: '\\in ',
     offset: 0,

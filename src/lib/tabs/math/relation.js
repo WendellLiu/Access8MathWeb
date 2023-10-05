@@ -1,11 +1,11 @@
 import { ReactComponent as Cong } from '@/components/svg/relation/cong.svg';
-import { ReactComponent as Sim } from '@/components/svg/operator/sim.svg';
-import { ReactComponent as Parallel } from '@/components/svg/operator/parallel.svg';
-import { ReactComponent as Perp } from '@/components/svg/operator/perp.svg';
-import { ReactComponent as Le } from '@/components/svg/operator/le.svg';
-import { ReactComponent as Ge } from '@/components/svg/operator/ge.svg';
-import { ReactComponent as Ne } from '@/components/svg/operator/ne.svg';
-import { ReactComponent as Approx } from '@/components/svg/operator/approx.svg';
+import { ReactComponent as Sim } from '@/components/svg/relation/sim.svg';
+import { ReactComponent as Parallel } from '@/components/svg/relation/parallel.svg';
+import { ReactComponent as Perp } from '@/components/svg/relation/perp.svg';
+import { ReactComponent as Le } from '@/components/svg/relation/le.svg';
+import { ReactComponent as Ge } from '@/components/svg/relation/ge.svg';
+import { ReactComponent as Ne } from '@/components/svg/relation/ne.svg';
+import { ReactComponent as Approx } from '@/components/svg/relation/approx.svg';
 
 const relation = [
   {

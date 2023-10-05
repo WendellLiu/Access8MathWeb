@@ -50,12 +50,80 @@ const EditIconsTab = ({ insertLatex }) => {
             ))}
           </Tab.List>
         </div>
-        {mainActive === 'markdown' && (
-          <div>
-            <Tab.Panels
-              as="div"
-              className="bg-bg2 border border-gray-300 flex flex-wrap"
-            >
+        <div>
+          <Tab.Panels
+            as="div"
+            className="bg-bg2 border border-gray-300 flex flex-wrap"
+          >
+            <Tab.Panel>
+              <Tab.Group as="div">
+                <div className="flex">
+                  <Tab.List
+                    as="div"
+                    className="flex-auto flex flex-wrap xl:flex-nowrap bg-white"
+                  >
+                    {mathTabList.map((tab) => (
+                      <Tab
+                        as="button"
+                        key={tab.id}
+                        aria-label={t(`categorys.${tab.id}`)}
+                        className={`group relative category-icon h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:shrink-0 order mx-0.5 border bg-gray-50 cursor-pointer transition-color ${
+                          mathTabActive === tab.id ? 'active' : ''
+                        }`}
+                        onClick={() => setMathTabActive(tab.id)}
+                      >
+                        <tab.Icon size={48} />
+                        <div
+                          className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
+                          style={{
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            top: '55px',
+                          }}
+                        >
+                          {t(`categorys.${tab.id}`)}
+                        </div>
+                      </Tab>
+                    ))}
+                  </Tab.List>
+                </div>
+                <Tab.Panels
+                  as="div"
+                  className="bg-bg2 border border-gray-300 flex flex-wrap"
+                >
+                  {mathTabList.map((mathTab) => {
+                    return (
+                      <Tab.Panel key={mathTab.id}>
+                        {(mathTab?.subTabs || [])
+                          .sort(compare('order', 'asc'))
+                          .map((subTab) => (
+                            <button
+                              key={subTab.id}
+                              className="w-w5 h-w5 bg-white border group relative"
+                              aria-label={t(`latexs.${subTab.id}`)}
+                              onClick={() => insertLatex(subTab)}
+                            >
+                              <subTab.Icon size={51} />
+                              <Tab
+                                as="div"
+                                className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
+                                style={{
+                                  left: '50%',
+                                  transform: 'translateX(-50%)',
+                                  top: '55px',
+                                }}
+                              >
+                                {t(`latexs.${subTab.id}`)}
+                              </Tab>
+                            </button>
+                          ))}
+                      </Tab.Panel>
+                    );
+                  })}
+                </Tab.Panels>
+              </Tab.Group>
+            </Tab.Panel>
+            <Tab.Panel>
               {markdowns.map((tab) => (
                 <button
                   key={tab.id}
@@ -77,77 +145,10 @@ const EditIconsTab = ({ insertLatex }) => {
                   </Tab>
                 </button>
               ))}
-            </Tab.Panels>
-          </div>
-        )}
-        {mainActive === 'math' && (
-          <div>
-            <Tab.Group as="div">
-              <div className="flex">
-                <Tab.List
-                  as="div"
-                  className="flex-auto flex flex-wrap xl:flex-nowrap bg-white"
-                >
-                  {mathTabList.map((tab) => (
-                    <Tab
-                      as="button"
-                      key={tab.id}
-                      aria-label={t(`categorys.${tab.id}`)}
-                      className={`group relative category-icon h-12 flex-basis-like-1/3 xl:flex-basis-auto grow xl:shrink-0 order mx-0.5 border bg-gray-50 cursor-pointer transition-color ${
-                        mathTabActive === tab.id ? 'active' : ''
-                      }`}
-                      onClick={() => setMathTabActive(tab.id)}
-                    >
-                      <tab.Icon size={48} />
-                      <div
-                        className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
-                        style={{
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          top: '55px',
-                        }}
-                      >
-                        {t(`categorys.${tab.id}`)}
-                      </div>
-                    </Tab>
-                  ))}
-                </Tab.List>
-              </div>
-              {
-                <Tab.Panels
-                  as="div"
-                  className="bg-bg2 border border-gray-300 flex flex-wrap"
-                >
-                  <Tab.Panel>
-                    {mathSubTabList.map((tab) => {
-                      return (
-                        <button
-                          key={tab.id}
-                          className="w-w5 h-w5 bg-white border group relative"
-                          aria-label={t(`latexs.${tab.id}`)}
-                          onClick={() => insertLatex(tab)}
-                        >
-                          <tab.Icon size={51} />
-                          <Tab
-                            as="div"
-                            className="absolute p-4 shadow-lg hidden bg-bg2 group-hover:block whitespace-nowrap z-10"
-                            style={{
-                              left: '50%',
-                              transform: 'translateX(-50%)',
-                              top: '55px',
-                            }}
-                          >
-                            {t(`latexs.${tab.id}`)}
-                          </Tab>
-                        </button>
-                      );
-                    })}
-                  </Tab.Panel>
-                </Tab.Panels>
-              }
-            </Tab.Group>
-          </div>
-        )}
+            </Tab.Panel>
+          </Tab.Panels>
+        </div>
+        {mainActive === 'math' && <div></div>}
       </Tab.Group>
     </div>
   );

@@ -48,22 +48,6 @@
     order: 5,
   },
   {
-    id: 'because',
-    latex: '\\because',
-    offset: 0,
-    category: 'logic',
-    shortcut: -1,
-    order: 0,
-  },
-  {
-    id: 'therefore',
-    latex: '\\therefore',
-    offset: 0,
-    category: 'logic',
-    shortcut: -1,
-    order: 1,
-  },
-  {
     id: 'matrix2X2',
     latex:
       '\\left [ \\begin{matrix} {} &{} \\\\ {} &{} \\end{matrix} \\right ]',
@@ -234,30 +218,6 @@
     category: 'set',
     shortcut: -1,
     order: 16,
-  },
-  {
-    id: 'iff',
-    latex: '\\iff',
-    offset: 0,
-    category: 'logic',
-    shortcut: -1,
-    order: 2,
-  },
-  {
-    id: 'implies',
-    latex: '\\implies',
-    offset: 0,
-    category: 'logic',
-    shortcut: -1,
-    order: 3,
-  },
-  {
-    id: 'impliedby',
-    latex: '\\impliedby',
-    offset: 0,
-    category: 'logic',
-    shortcut: -1,
-    order: 4,
   },
   {
     id: 'alpha-lower',

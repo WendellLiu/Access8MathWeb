@@ -12,6 +12,7 @@ import { ReactComponent as LowerGreekAlphabet } from '@/components/svg/math/lowe
 import commonList from './common';
 import operatorList from './operator';
 import relationList from './relation';
+import logicList from './logic';
 
 const mathTabList = [
   {
@@ -32,6 +33,7 @@ const mathTabList = [
   {
     id: 'logic',
     Icon: Logic,
+    subTabs: logicList,
   },
   {
     id: 'arrow',

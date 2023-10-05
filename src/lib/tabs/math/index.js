@@ -16,6 +16,7 @@ import logicList from './logic';
 import arrowList from './arrow';
 import twoDimensionList from './two-dimension';
 import setList from './set';
+import otherList from './other';
 
 const mathTabList = [
   {
@@ -56,6 +57,7 @@ const mathTabList = [
   {
     id: 'other',
     Icon: Other,
+    subTabs: otherList,
   },
   {
     id: 'upper_greek_alphabet',

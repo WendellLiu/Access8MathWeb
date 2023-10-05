@@ -1,5 +1,6 @@
 import { textmath2laObj as textmath2laObjFactory } from '@/lib/content-processor/math-process';
-import latexs from '@/lib/tabs/math/latexs';
+
+import mathTabList from '@/lib/tabs/math/index';
 
 export const bdconvert = (mode) => (data) => {
   return data
@@ -37,10 +38,14 @@ export const bdconvert = (mode) => (data) => {
     }, '');
 };
 
+const allMathSubTabs = mathTabList.reduce((acc, mathTab) => {
+  return acc.concat(mathTab.subTabs || []);
+}, []);
+
 export const myCompletions = (context) => {
   let word = context.matchBefore(new RegExp('\\\\\\w*'));
   if (!word || (word.from == word.to && !context.explicit)) return null;
-  const options = latexs.map((item) => {
+  const options = allMathSubTabs.map((item) => {
     return {
       label: item.latex,
       type: 'text',

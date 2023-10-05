@@ -17,6 +17,8 @@ import arrowList from './arrow';
 import twoDimensionList from './two-dimension';
 import setList from './set';
 import otherList from './other';
+import upperGreekAlphabetList from './upper-greek-alphabet';
+import lowerGreekAlphabetList from './lower-greek-alphabet';
 
 const mathTabList = [
   {
@@ -62,10 +64,12 @@ const mathTabList = [
   {
     id: 'upper_greek_alphabet',
     Icon: UpperGreekAlphabet,
+    subTabs: upperGreekAlphabetList,
   },
   {
     id: 'lower_greek_alphabet',
     Icon: LowerGreekAlphabet,
+    subTabs: lowerGreekAlphabetList,
   },
 ];
 

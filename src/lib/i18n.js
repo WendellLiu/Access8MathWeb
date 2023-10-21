@@ -12,7 +12,6 @@ i18n
     lng: 'zh-TW',
     fallbackLng: 'en',
     debug: true,
-
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },

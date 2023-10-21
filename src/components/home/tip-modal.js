@@ -13,15 +13,18 @@ const TipModal = ({ isOpen, onClose }) => {
     <BasicModal
       title={t('title')}
       isOpen={isOpen}
-      hasConfirm={false}
+      hasCancel={false}
       onClose={onClose}
-      onCancel={onClose}
+      onConfirm={onClose}
+      confirmLabel={t('cancelLabel')}
     >
-      <div className="mt-m2">
+      <div>
         {tips.map(({ title, content }, index) => (
-          <div key={index} className="py-p5 px-m2 text-left text-lg">
-            <b>{title}</b>
-            <p>{content}</p>
+          <div key={index} className="mb-4 text-left text-lg">
+            <h4 className="text-base font-semibold leading-6 text-gray-900 mb-1">
+              {title}
+            </h4>
+            <p className="text-base">{content}</p>
           </div>
         ))}
       </div>

@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Dialog, Transition } from '@headlessui/react';
+
+import Button from '@/components/core/button';
 import i18n from '@/lib/i18n';
 
 const BsicModal = ({
@@ -11,8 +13,8 @@ const BsicModal = ({
   onConfirm = () => {},
   hasCancel = true,
   hasConfirm = true,
-  cancelLabel = i18n.t('modal.cancel'),
-  confirmLabel = i18n.t('modal.confirm'),
+  cancelLabel = i18n.t('cancel', { ns: 'modal' }),
+  confirmLabel = i18n.t('confirm', { ns: 'modal' }),
   children,
 }) => {
   return (
@@ -23,12 +25,30 @@ const BsicModal = ({
         onClose={onClose}
       >
         <div className="flex items-center justify-center min-h-screen">
-          <div className="fixed inset-0 bg-black/25" />
-          <Dialog.Panel className="bg-white shadow-xl rounded-2xl p-4 z-10">
-            <Dialog.Title>{title}</Dialog.Title>
-            {children}
-            {hasCancel && <button onClick={onCancel}>{cancelLabel}</button>}
-            {hasConfirm && <button onClick={onConfirm}>{confirmLabel}</button>}
+          {/* background layer */}
+          <div className="fixed inset-0 bg-black/60" />
+          <Dialog.Panel className="flex-col bg-white shadow-xl rounded-2xl p-8 z-10">
+            <Dialog.Title as="h3" className="text-2xl mb-8">
+              {title}
+            </Dialog.Title>
+            <div className="mb-8">{children}</div>
+            <div className="flex justify-center">
+              {hasCancel && (
+                <Button
+                  size="l"
+                  className="mr-2"
+                  variant="secondary"
+                  onClick={onCancel}
+                >
+                  {cancelLabel}
+                </Button>
+              )}
+              {hasConfirm && (
+                <Button size="l" onClick={onConfirm}>
+                  {confirmLabel}
+                </Button>
+              )}
+            </div>
           </Dialog.Panel>
         </div>
       </Dialog>

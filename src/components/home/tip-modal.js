@@ -35,11 +35,6 @@ const TipModal = ({ isOpen, onClose }) => {
 TipModal.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
-  onCancel: PropTypes.func,
-  cancelLabel: PropTypes.string,
-  onConfirm: PropTypes.func,
-  confirmLabel: PropTypes.string,
-  title: PropTypes.string,
 };
 
 export default TipModal;

@@ -8,37 +8,6 @@
   "useDescript": "Instruction",
   "understand": "understand",
   "useSetting": "Setting",
-  "SettingFinish": "Finish",
-  "Setting": {
-    "DocumentDisplay": {
-      "Name": "Document Display",
-      "Options": [
-        "Text",
-        "Markdown"
-      ]
-    },
-    "MathDisplay": {
-      "Name": "Math Display",
-      "Options": [
-        "Block",
-        "Line Space"
-      ]
-    },
-    "ColorMatch": {
-      "Name": "Color Match",
-      "Options": [
-        "Black text on a white background",
-        "White text on a black background"
-      ]
-    },
-    "LaTeX_Delimiter": {
-      "Name": "LaTeX Delimiter",
-      "Options": [
-        "Parenthesis",
-        "Dollar Sign"
-      ]
-    }
-  },
   "language": "EN",
   "changeLanguage": "Change language",
   "languageChanged": "Change to English"

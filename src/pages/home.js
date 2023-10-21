@@ -25,15 +25,17 @@ import mml2svg from '@/lib/content-processor/mml2svg.js';
 
 import Button from '@/components/core/button';
 import EditIconsTab from '@/components/edit-icons-tab';
+import TipModal from '@/components/home/tip-modal';
 import { ReactComponent as QuestionCircleComponent } from '@/components/svg/question-circle.svg';
 import { ReactComponent as SettingComponent } from '@/components/svg/settings.svg';
 
+// TODO: mvoe the helpers to somewhere appropriate
 import { myCompletions, bdconvert } from './helpers';
 
 export default function Home() {
   const [basic, setBasic] = useState(false);
   const [data, setData] = useState('');
-  const [showUseTipModal, setShowUseTipModal] = useState(false);
+  const [showTipModal, setShowTipModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
   const [selecteds, setSelecteds] = useState({
     HTML_document_display: 'markdown',
@@ -292,7 +294,7 @@ export default function Home() {
           </Button>
           <button
             className="hover:scale-110 transition-scale ml-2"
-            onClick={() => setShowUseTipModal(true)}
+            onClick={() => setShowTipModal(true)}
             aria-label={t('descript')}
           >
             <QuestionCircleComponent />
@@ -357,6 +359,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      <TipModal isOpen={showTipModal} onClose={() => setShowTipModal(false)} />
     </div>
   );
 }

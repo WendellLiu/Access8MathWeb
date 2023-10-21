@@ -25,6 +25,8 @@ import mml2svg from '@/lib/content-processor/mml2svg.js';
 
 import Button from '@/components/core/button';
 import EditIconsTab from '@/components/edit-icons-tab';
+import { ReactComponent as QuestionCircleComponent } from '@/components/svg/question-circle.svg';
+import { ReactComponent as SettingComponent } from '@/components/svg/settings.svg';
 
 import { myCompletions, bdconvert } from './helpers';
 
@@ -293,7 +295,7 @@ export default function Home() {
             onClick={() => setShowUseTipModal(true)}
             aria-label={t('descript')}
           >
-            tipmodal
+            <QuestionCircleComponent />
           </button>
         </div>
         <EditIconsTab insertLatex={insertLatex} />
@@ -325,7 +327,7 @@ export default function Home() {
 
       {/* Right side output panel */}
       <div className="w-2/4 flex-basis-like-1/1 grow md:flex-1 text-left p-p1 pt-p1 pl-p3 flex flex-col">
-        <div className="flex md:mb-m3 w-100">
+        <div className="flex md:mb-m3 w-100 justify-between">
           <p
             role="heading"
             aria-level="1"
@@ -337,7 +339,7 @@ export default function Home() {
             onClick={() => setShowSettingModal(true)}
             aria-label={t('useSetting')}
           >
-            modal
+            <SettingComponent />
           </button>
         </div>
         {selecteds['HTML_document_display'] === 'markdown' ? (

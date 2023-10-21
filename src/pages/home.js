@@ -38,12 +38,13 @@ export default function Home() {
   const [data, setData] = useState('');
   const [showTipModal, setShowTipModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
-  const [selecteds, setSelecteds] = useState({
-    HTML_document_display: 'markdown',
-    HTML_math_display: 'block',
-    color_match: 'blackTextOnWhiteBackground',
-    LaTeX_delimiter: 'bracket',
+
+  const [displayConfig, setDisplayConfig] = useState({
+    htmlDocumentDisplay: 'markdown',
+    htmlMathDisplay: 'block',
+    latexDelimiter: 'bracket',
   });
+
   const [selectionStart, setSelectionStart] = useState(-1);
   const [selectionEnd, setSelectionEnd] = useState(-1);
 
@@ -54,24 +55,24 @@ export default function Home() {
   const content = useMemo(() => {
     return data.split('\n').map((line) => {
       return textmath2laObjFactory({
-        latex_delimiter: selecteds['LaTeX_delimiter'],
+        latex_delimiter: displayConfig.latexDelimiter,
         asciimath_delimiter: 'graveaccent',
       })(line).reduce((a, b) => {
         let result;
         if (b.type === 'latex-content') {
           result = `<div class="sr-only">${latex2mmlFactory({
-            display: selecteds['HTML_math_display'],
+            display: displayConfig.htmlMathDisplay,
           })(b.data)}</div><div aria-hidden="true">${mml2svg(
             latex2mmlFactory({
-              display: selecteds['HTML_math_display'],
+              display: displayConfig.htmlMathDisplay,
             })(b.data),
           )}</div>`;
         } else if (b.type === 'asciimath-content') {
           result = `<div class="sr-only">${asciimath2mmlFactory({
-            display: selecteds['HTML_math_display'],
+            display: displayConfig.htmlMathDisplay,
           })(b.data)}</div><div aria-hidden="true">${mml2svg(
             asciimath2mmlFactory({
-              display: selecteds['HTML_math_display'],
+              display: displayConfig.htmlMathDisplay,
             })(b.data),
           )}</div>`;
         } else {
@@ -80,15 +81,15 @@ export default function Home() {
         return a + result;
       }, '');
     });
-  }, [data, selecteds]);
+  }, [data, displayConfig]);
 
   const contentmd = useMemo(() => {
     return markedFactory({
-      latex_delimiter: selecteds['LaTeX_delimiter'],
+      latex_delimiter: displayConfig.latexDelimiter,
       asciimath_delimiter: 'graveaccent',
-      display: selecteds['HTML_math_display'],
+      display: displayConfig.htmlMathDisplay,
     })(data);
-  }, [data, selecteds]);
+  }, [data, displayConfig]);
 
   const createView = useCallback((content = '') => {
     if (codemirrorView.current) {
@@ -136,10 +137,10 @@ export default function Home() {
       );
       let LaTeX_delimiter_start = '\\(';
       let LaTeX_delimiter_end = '\\)';
-      if (selecteds['LaTeX_delimiter'] === 'bracket') {
+      if (displayConfig.latexDelimiter === 'bracket') {
         LaTeX_delimiter_start = '\\(';
         LaTeX_delimiter_end = '\\)';
-      } else if (selecteds['LaTeX_delimiter'] === 'dollar') {
+      } else if (displayConfig.latexDelimiter === 'dollar') {
         LaTeX_delimiter_start = '$';
         LaTeX_delimiter_end = '$';
       }
@@ -160,10 +161,10 @@ export default function Home() {
 
     let LaTeX_delimiter_start = '\\(';
     let LaTeX_delimiter_end = '\\)';
-    if (selecteds['LaTeX_delimiter'] === 'bracket') {
+    if (displayConfig.latexDelimiter === 'bracket') {
       LaTeX_delimiter_start = '\\(';
       LaTeX_delimiter_end = '\\)';
-    } else if (selecteds['LaTeX_delimiter'] === 'dollar') {
+    } else if (displayConfig.latexDelimiter === 'dollar') {
       LaTeX_delimiter_start = '$';
       LaTeX_delimiter_end = '$';
     }
@@ -185,7 +186,7 @@ export default function Home() {
       }),
     );
     view.focus();
-  }, [basic, selecteds, data]);
+  }, [basic, displayConfig, data]);
 
   const laTeXSepConvert = useCallback(
     (mode) => {
@@ -218,7 +219,6 @@ export default function Home() {
     ({ latex, offset }) => {
       if (basic) {
         const target = inputArea.current;
-        console.log({ target });
         const content = latex;
 
         setData(
@@ -255,6 +255,10 @@ export default function Home() {
     },
     [data, basic],
   );
+
+  const updateDisplayConfig = useCallback((configKey, configValue) => {
+    setDisplayConfig((config) => ({ ...config, [configKey]: configValue }));
+  }, []);
 
   const importAction = useCallback(() => {
     // Import action logic here
@@ -345,7 +349,7 @@ export default function Home() {
             <SettingComponent />
           </button>
         </div>
-        {selecteds['HTML_document_display'] === 'markdown' ? (
+        {displayConfig.htmlDocumentDisplay === 'markdown' ? (
           <div
             className="right-side-input-textarea border-2 overflow-scroll p-4 flex-1 rounded-lg"
             dangerouslySetInnerHTML={{ __html: contentmd }}
@@ -364,6 +368,8 @@ export default function Home() {
       <SettingModal
         isOpen={showSettingModal}
         onClose={() => setShowSettingModal(false)}
+        updateConfig={updateDisplayConfig}
+        displayConfig={displayConfig}
       />
     </div>
   );

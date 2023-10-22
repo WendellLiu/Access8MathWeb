@@ -264,7 +264,7 @@ export default function Home() {
 
   return (
     <main className="container">
-      <div className="home flex flex-col md:flex-row pt-16 md:pt-20 md:h-screen w-screen overflow-x-hidden overflow-y-auto">
+      <div className="home flex flex-col md:flex-row md:h-screen w-screen overflow-x-hidden overflow-y-auto">
         {/* Left side input panel */}
         <div className="md:w-1/2 bg-bg1 p-8 flex flex-col">
           <div className="flex justify-between">

@@ -206,94 +206,92 @@ export default function Home() {
   const t = useTranslation('home');
 
   return (
-    <main className="container">
-      <div className="home flex flex-col md:flex-row md:h-screen w-screen overflow-x-hidden overflow-y-auto">
-        {/* Left side input panel */}
-        <div className="md:w-1/2 bg-bg1 p-8 flex flex-col">
-          <div className="flex justify-between">
-            <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
-              {t('editContent')}
-            </p>
-            <button
-              className="hover:scale-110 transition-scale ml-2"
-              onClick={() => setShowTipModal(true)}
-              aria-label={t('descript')}
-            >
-              <QuestionCircleComponent />
-            </button>
-          </div>
-          <div className="flex justify-end mb-4 mt-8 md:mt-m1">
-            <Button variant="primary" className="ml-2" onClick={insertMark}>
-              {t('mark')}
-            </Button>
-            <Button
-              variant="primary"
-              className="ml-2"
-              onClick={() => laTeXSepConvert('d2b')}
-            >
-              {t('dollar2bracket')}
-            </Button>
-            <Button
-              variant="primary"
-              className="ml-2"
-              onClick={() => laTeXSepConvert('b2d')}
-            >
-              {t('bracket2dollar')}
-            </Button>
-            <Button variant="primary" className="ml-2" onClick={importClick}>
-              {t('import')}
-            </Button>
-            <Button variant="primary" className="ml-2" onClick={exportClick}>
-              {t('export')}
-            </Button>
-          </div>
-          <EditIconsTab insertLatex={insertLatex} />
-          <div className="flex flex-1">
-            <div
-              id="codemirror"
-              className="left-side-input-textarea flex-1 resize-none border border-bd1 overflow-y-scroll rounded-b-lg"
-            />
-            <input
-              ref={importFile}
-              type="file"
-              className="hidden"
-              onChange={importAction}
-            />
-          </div>
+    <div className="home flex flex-col md:flex-row md:h-screen w-screen overflow-x-hidden overflow-y-auto">
+      {/* Left side input panel */}
+      <div className="md:w-1/2 bg-bg1 p-8 flex flex-col">
+        <div className="flex justify-between">
+          <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
+            {t('editContent')}
+          </p>
+          <button
+            className="hover:scale-110 transition-scale ml-2"
+            onClick={() => setShowTipModal(true)}
+            aria-label={t('descript')}
+          >
+            <QuestionCircleComponent />
+          </button>
         </div>
+        <div className="flex justify-end mb-4 mt-8 md:mt-m1">
+          <Button variant="primary" className="ml-2" onClick={insertMark}>
+            {t('mark')}
+          </Button>
+          <Button
+            variant="primary"
+            className="ml-2"
+            onClick={() => laTeXSepConvert('d2b')}
+          >
+            {t('dollar2bracket')}
+          </Button>
+          <Button
+            variant="primary"
+            className="ml-2"
+            onClick={() => laTeXSepConvert('b2d')}
+          >
+            {t('bracket2dollar')}
+          </Button>
+          <Button variant="primary" className="ml-2" onClick={importClick}>
+            {t('import')}
+          </Button>
+          <Button variant="primary" className="ml-2" onClick={exportClick}>
+            {t('export')}
+          </Button>
+        </div>
+        <EditIconsTab insertLatex={insertLatex} />
+        <div className="flex flex-1">
+          <div
+            id="codemirror"
+            className="left-side-input-textarea flex-1 resize-none border border-bd1 overflow-y-scroll rounded-b-lg"
+          />
+          <input
+            ref={importFile}
+            type="file"
+            className="hidden"
+            onChange={importAction}
+          />
+        </div>
+      </div>
 
-        {/* Right side output panel */}
-        <div className="md:w-1/2 flex flex-col md:h-full h-[600px] p-8">
-          <div className="flex mb-4 w-100 justify-between">
-            <p
-              role="heading"
-              aria-level="1"
-              className="text-2xl md:text-3xl w-100"
-            >
-              {t('result')}
-            </p>
-            <button
-              onClick={() => setShowSettingModal(true)}
-              aria-label={t('setting')}
-            >
-              <SettingComponent />
-            </button>
-          </div>
-          {displayConfig.htmlDocumentDisplay === 'markdown' ? (
-            <div
-              className="right-side-input-textarea border-2 overflow-scroll p-4 flex-1 rounded-lg"
-              dangerouslySetInnerHTML={{ __html: contentmd }}
-            />
-          ) : (
-            <div className="right-side-input-textarea border-2 overflow-scroll p-4 flex-1 rounded-lg">
-              {content.map((line, key) => (
-                <span key={key}>
-                  <span dangerouslySetInnerHTML={{ __html: line }} />
-                </span>
-              ))}
-            </div>
-          )}
+      {/* Right side output panel */}
+      <div className="md:w-1/2 flex flex-col md:h-full h-[600px] p-8">
+        <div className="flex mb-4 w-100 justify-between">
+          <p
+            role="heading"
+            aria-level="1"
+            className="text-2xl md:text-3xl w-100"
+          >
+            {t('result')}
+          </p>
+          <button
+            onClick={() => setShowSettingModal(true)}
+            aria-label={t('setting')}
+          >
+            <SettingComponent />
+          </button>
         </div>
+        {displayConfig.htmlDocumentDisplay === 'markdown' ? (
+          <div
+            className="right-side-input-textarea border-2 overflow-scroll p-4 flex-1 rounded-lg"
+            dangerouslySetInnerHTML={{ __html: contentmd }}
+          />
+        ) : (
+          <div className="right-side-input-textarea border-2 overflow-scroll p-4 flex-1 rounded-lg">
+            {content.map((line, key) => (
+              <span key={key}>
+                <span dangerouslySetInnerHTML={{ __html: line }} />
+              </span>
+            ))}
+          </div>
+        )}
       </div>
       <TipModal isOpen={showTipModal} onClose={() => setShowTipModal(false)} />
       <SettingModal
@@ -302,6 +300,6 @@ export default function Home() {
         onSubmit={setDisplayConfig}
         displayConfig={displayConfig}
       />
-    </main>
+    </div>
   );
 }

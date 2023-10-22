@@ -9,5 +9,6 @@
   "result": "轉換結果",
   "language": "TC",
   "changeLanguage": "語言切換",
-  "languageChanged": "已切換為繁體中文"
+  "languageChanged": "已切換為繁體中文",
+  "setting": "設定"
 }

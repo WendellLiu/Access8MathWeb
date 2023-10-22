@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Dialog, Transition } from '@headlessui/react';
 
 import Button from '@/components/core/button';
-import i18n from '@/lib/i18n';
 
 const BsicModal = ({
   title,
@@ -13,8 +12,8 @@ const BsicModal = ({
   onConfirm = () => {},
   hasCancel = true,
   hasConfirm = true,
-  cancelLabel = i18n.t('cancel', { ns: 'modal' }),
-  confirmLabel = i18n.t('confirm', { ns: 'modal' }),
+  cancelLabel = 'Cancel',
+  confirmLabel = 'Confirm',
   children,
 }) => {
   return (

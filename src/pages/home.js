@@ -256,10 +256,6 @@ export default function Home() {
     [data, basic],
   );
 
-  const updateDisplayConfig = useCallback((configKey, configValue) => {
-    setDisplayConfig((config) => ({ ...config, [configKey]: configValue }));
-  }, []);
-
   const importAction = useCallback(() => {
     // Import action logic here
   }, []);
@@ -344,7 +340,7 @@ export default function Home() {
           </p>
           <button
             onClick={() => setShowSettingModal(true)}
-            aria-label={t('useSetting')}
+            aria-label={t('setting')}
           >
             <SettingComponent />
           </button>
@@ -368,7 +364,7 @@ export default function Home() {
       <SettingModal
         isOpen={showSettingModal}
         onClose={() => setShowSettingModal(false)}
-        updateConfig={updateDisplayConfig}
+        onSubmit={setDisplayConfig}
         displayConfig={displayConfig}
       />
     </div>

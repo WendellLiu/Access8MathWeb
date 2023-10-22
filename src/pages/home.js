@@ -264,9 +264,9 @@ export default function Home() {
 
   return (
     <main className="container">
-      <div className="home flex flex-wrap pt-16 md:pt-20 h-screen w-screen overflow-x-hidden overflow-y-auto">
+      <div className="home flex flex-col md:flex-row pt-16 md:pt-20 md:h-screen w-screen overflow-x-hidden overflow-y-auto">
         {/* Left side input panel */}
-        <div className="w-2/4 p-3 flex-basis-like-1/1 grow md:flex-1 bg-bg1 text-left pt-3 pl-8 pr-8 flex flex-col">
+        <div className="md:w-1/2 bg-bg1 p-8 flex flex-col">
           <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
             {t('editContent')}
           </p>
@@ -330,8 +330,8 @@ export default function Home() {
         </div>
 
         {/* Right side output panel */}
-        <div className="w-2/4 flex-basis-like-1/1 grow md:flex-1 text-left p-p1 pt-p1 pl-p3 flex flex-col">
-          <div className="flex md:mb-m3 w-100 justify-between">
+        <div className="md:w-1/2 flex flex-col md:h-full h-[600px] p-8">
+          <div className="flex mb-4 w-100 justify-between">
             <p
               role="heading"
               aria-level="1"
@@ -361,17 +361,14 @@ export default function Home() {
             </div>
           )}
         </div>
-        <TipModal
-          isOpen={showTipModal}
-          onClose={() => setShowTipModal(false)}
-        />
-        <SettingModal
-          isOpen={showSettingModal}
-          onClose={() => setShowSettingModal(false)}
-          onSubmit={setDisplayConfig}
-          displayConfig={displayConfig}
-        />
       </div>
+      <TipModal isOpen={showTipModal} onClose={() => setShowTipModal(false)} />
+      <SettingModal
+        isOpen={showSettingModal}
+        onClose={() => setShowSettingModal(false)}
+        onSubmit={setDisplayConfig}
+        displayConfig={displayConfig}
+      />
     </main>
   );
 }

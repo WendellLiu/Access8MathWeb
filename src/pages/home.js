@@ -34,7 +34,6 @@ import { ReactComponent as SettingComponent } from '@/components/svg/settings.sv
 import { myCompletions, bdconvert } from './helpers';
 
 export default function Home() {
-  const [basic, setBasic] = useState(false);
   const [data, setData] = useState('');
   const [showTipModal, setShowTipModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
@@ -44,9 +43,6 @@ export default function Home() {
     htmlMathDisplay: 'block',
     latexDelimiter: 'bracket',
   });
-
-  const [selectionStart, setSelectionStart] = useState(-1);
-  const [selectionEnd, setSelectionEnd] = useState(-1);
 
   const codemirrorView = useRef(null);
   const inputArea = useRef(null);
@@ -129,36 +125,6 @@ export default function Home() {
   }, [createView]);
 
   const insertMark = useCallback(() => {
-    if (basic) {
-      const target = inputArea.current;
-      const selectedText = target.value.slice(
-        target.selectionStart,
-        target.selectionEnd,
-      );
-      let LaTeX_delimiter_start = '\\(';
-      let LaTeX_delimiter_end = '\\)';
-      if (displayConfig.latexDelimiter === 'bracket') {
-        LaTeX_delimiter_start = '\\(';
-        LaTeX_delimiter_end = '\\)';
-      } else if (displayConfig.latexDelimiter === 'dollar') {
-        LaTeX_delimiter_start = '$';
-        LaTeX_delimiter_end = '$';
-      }
-      const startOffset = LaTeX_delimiter_start.length;
-      const endOffset = LaTeX_delimiter_end.length;
-      const content = `${LaTeX_delimiter_start}${selectedText}${LaTeX_delimiter_end}`;
-
-      setData(
-        data.slice(0, target.selectionStart) +
-          content +
-          data.slice(target.selectionEnd, data.length),
-      );
-
-      setSelectionStart(target.selectionStart + startOffset);
-      setSelectionEnd(target.selectionEnd + endOffset);
-      return;
-    }
-
     let LaTeX_delimiter_start = '\\(';
     let LaTeX_delimiter_end = '\\)';
     if (displayConfig.latexDelimiter === 'bracket') {
@@ -186,19 +152,14 @@ export default function Home() {
       }),
     );
     view.focus();
-  }, [basic, displayConfig, data]);
+  }, [displayConfig]);
 
   const laTeXSepConvert = useCallback(
     (mode) => {
-      if (basic) {
-        setData(bdconvert(mode)(data));
-        return;
-      }
-
       const value = bdconvert(mode)(data);
       createView(value);
     },
-    [basic, data, createView],
+    [data, createView],
   );
 
   const importClick = useCallback(() => {
@@ -215,46 +176,28 @@ export default function Home() {
     link.click();
   }, [data]);
 
-  const insertLatex = useCallback(
-    ({ latex, offset }) => {
-      if (basic) {
-        const target = inputArea.current;
-        const content = latex;
-
-        setData(
-          data.slice(0, target.selectionStart) +
-            content +
-            data.slice(target.selectionEnd, data.length),
-        );
-
-        setSelectionStart(target.selectionStart + latex.length + offset);
-        setSelectionEnd(target.selectionStart + latex.length + offset);
-        return;
-      }
-
-      const view = codemirrorView.current;
-      view.dispatch(
-        view.state.changeByRange((range) => ({
-          changes: [
-            {
-              from: range.from,
-              insert: latex.slice(0, latex.length + offset),
-            },
-            {
-              from: range.to,
-              insert: latex.slice(latex.length + offset, latex.length),
-            },
-          ],
-          range: EditorSelection.range(
-            range.from + latex.length + offset,
-            range.from + latex.length + offset,
-          ),
-        })),
-      );
-      view.focus();
-    },
-    [data, basic],
-  );
+  const insertLatex = useCallback(({ latex, offset }) => {
+    const view = codemirrorView.current;
+    view.dispatch(
+      view.state.changeByRange((range) => ({
+        changes: [
+          {
+            from: range.from,
+            insert: latex.slice(0, latex.length + offset),
+          },
+          {
+            from: range.to,
+            insert: latex.slice(latex.length + offset, latex.length),
+          },
+        ],
+        range: EditorSelection.range(
+          range.from + latex.length + offset,
+          range.from + latex.length + offset,
+        ),
+      })),
+    );
+    view.focus();
+  }, []);
 
   const importAction = useCallback(() => {
     // Import action logic here
@@ -306,22 +249,10 @@ export default function Home() {
           </div>
           <EditIconsTab insertLatex={insertLatex} />
           <div className="flex flex-1">
-            {basic ? (
-              <textarea
-                ref={inputArea}
-                className="left-side-input-textarea flex-1 resize-none p-3 border border-bd1 overflow-y-scroll rounded-b-lg"
-                type="text"
-                value={data}
-                onChange={(e) => {
-                  setData(e.target.value);
-                }}
-              />
-            ) : (
-              <div
-                id="codemirror"
-                className="left-side-input-textarea flex-1 resize-none border border-bd1 overflow-y-scroll rounded-b-lg"
-              ></div>
-            )}
+            <div
+              id="codemirror"
+              className="left-side-input-textarea flex-1 resize-none border border-bd1 overflow-y-scroll rounded-b-lg"
+            />
             <input
               ref={importFile}
               type="file"

@@ -8,7 +8,7 @@ const Layout = () => {
         <h1>Access8Math</h1>
       </header>
 
-      <main className="container pt-20">
+      <main className="pt-20 md:h-screen w-screen ">
         <Outlet />
       </main>
     </div>

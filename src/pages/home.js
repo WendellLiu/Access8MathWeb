@@ -206,7 +206,7 @@ export default function Home() {
   const t = useTranslation('home');
 
   return (
-    <div className="home flex flex-col md:flex-row md:h-screen w-screen overflow-x-hidden overflow-y-auto">
+    <div className="w-full h-full flex flex-col md:flex-row overflow-x-hidden overflow-y-auto">
       {/* Left side input panel */}
       <div className="md:w-1/2 bg-bg1 p-8 flex flex-col">
         <div className="flex justify-between">

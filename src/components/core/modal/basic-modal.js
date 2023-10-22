@@ -26,7 +26,7 @@ const BsicModal = ({
         <div className="flex items-center justify-center min-h-screen">
           {/* background layer */}
           <div className="fixed inset-0 bg-black/60" />
-          <Dialog.Panel className="flex-col bg-white shadow-xl rounded-2xl p-8 z-10">
+          <Dialog.Panel className="max-w-xl flex-col bg-white shadow-xl rounded-2xl p-8 z-10">
             <Dialog.Title as="h3" className="text-2xl mb-8">
               {title}
             </Dialog.Title>

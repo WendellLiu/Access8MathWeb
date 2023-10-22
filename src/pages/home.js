@@ -267,9 +267,18 @@ export default function Home() {
       <div className="home flex flex-col md:flex-row pt-16 md:pt-20 md:h-screen w-screen overflow-x-hidden overflow-y-auto">
         {/* Left side input panel */}
         <div className="md:w-1/2 bg-bg1 p-8 flex flex-col">
-          <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
-            {t('editContent')}
-          </p>
+          <div className="flex justify-between">
+            <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
+              {t('editContent')}
+            </p>
+            <button
+              className="hover:scale-110 transition-scale ml-2"
+              onClick={() => setShowTipModal(true)}
+              aria-label={t('descript')}
+            >
+              <QuestionCircleComponent />
+            </button>
+          </div>
           <div className="flex justify-end mb-4 mt-8 md:mt-m1">
             <Button variant="primary" className="ml-2" onClick={insertMark}>
               {t('mark')}
@@ -294,13 +303,6 @@ export default function Home() {
             <Button variant="primary" className="ml-2" onClick={exportClick}>
               {t('export')}
             </Button>
-            <button
-              className="hover:scale-110 transition-scale ml-2"
-              onClick={() => setShowTipModal(true)}
-              aria-label={t('descript')}
-            >
-              <QuestionCircleComponent />
-            </button>
           </div>
           <EditIconsTab insertLatex={insertLatex} />
           <div className="flex flex-1">

@@ -30,36 +30,41 @@ const SettingModal = ({ isOpen, onClose, onSubmit, displayConfig }) => {
       onConfirm={onConfirm}
       confirmLabel={t('submit')}
     >
-      <div>
+      <div className="md:w-[30rem] w-[15rem]">
         <form>
           {optionGroup.map(({ configName, configLabel, options }) => {
             return (
-              <fieldset key={configName} className="mt-4">
-                <legend className="sr-only">{configLabel}</legend>
-                <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
-                  {options.map(({ value, label }) => (
-                    <div key={value} className="flex items-center">
-                      <input
-                        className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        id={value}
-                        type="radio"
-                        value={value}
-                        name={value}
-                        checked={localConfig[configName] === value}
-                        onChange={() => {
-                          updateLocalConfig(configName, value);
-                        }}
-                      />
-                      <label
-                        className="ml-3 block text-sm font-medium leading-6 text-gray-900"
-                        htmlFor={value}
-                      >
-                        {label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </fieldset>
+              <div key={configName} className="mb-4">
+                <label className="text-base font-semibold text-gray-900">
+                  {configLabel}
+                </label>
+                <fieldset className="mt-2">
+                  <legend className="sr-only">{configLabel}</legend>
+                  <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+                    {options.map(({ value, label }) => (
+                      <div key={value} className="flex items-center">
+                        <input
+                          className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          id={value}
+                          type="radio"
+                          value={value}
+                          name={value}
+                          checked={localConfig[configName] === value}
+                          onChange={() => {
+                            updateLocalConfig(configName, value);
+                          }}
+                        />
+                        <label
+                          className="ml-3 block text-sm font-medium leading-6 text-gray-900"
+                          htmlFor={value}
+                        >
+                          {label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </fieldset>
+              </div>
             );
           })}
         </form>

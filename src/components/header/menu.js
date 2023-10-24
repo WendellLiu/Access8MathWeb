@@ -60,16 +60,15 @@ const NativeMenu = () => {
           <div className="overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
             <div className="p-4">
               {items.map(({ id, name, href }) => (
-                <div
+                <a
                   key={id}
-                  className="group relative flex rounded-lg p-4 hover:bg-gray-50"
+                  href={href}
+                  className="font-semibold text-gray-900 group relative flex rounded-lg p-4 hover:bg-gray-50"
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  <div>
-                    <a href={href} className="font-semibold text-gray-900">
-                      {name}
-                    </a>
-                  </div>
-                </div>
+                  {name}
+                </a>
               ))}
             </div>
           </div>

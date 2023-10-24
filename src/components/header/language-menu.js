@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
+import { LanguageIcon } from '@heroicons/react/20/solid';
 
-import { useTranslation } from '@/lib/i18n';
-import { changeLanguage } from 'i18next';
+import i18n, { useTranslation } from '@/lib/i18n';
 
 const LANGUAGES = [
   { locale: 'zh-TW' },
@@ -16,8 +16,9 @@ const LanguageMenu = () => {
 
   return (
     <Popover className="relative">
-      <Popover.Button className="text-xl font-semibold leading-8 text-gray-900">
-        <span>Laungage</span>
+      <Popover.Button className="flex items-center text-xl font-semibold leading-8 text-gray-900">
+        <LanguageIcon className="h-5 w-5 flex-none mr-1" aria-hidden="true" />
+        <span>{commonT(`locale.${i18n.language}`)}</span>
       </Popover.Button>
 
       <Transition
@@ -35,10 +36,10 @@ const LanguageMenu = () => {
               {LANGUAGES.map(({ locale }) => (
                 <button
                   key={locale}
-                  className="group relative flex rounded-lg p-4 hover:bg-gray-50 font-semibold text-gray-900"
-                  onClick={() => changeLanguage(locale)}
+                  className="group relative flex rounded-lg p-4 hover:bg-gray-50 font-semibold text-gray-900 w-full"
+                  onClick={() => i18n.changeLanguage(locale)}
                 >
-                  {commonT(locale)}
+                  {commonT(`locale.${locale}`)}
                 </button>
               ))}
             </div>

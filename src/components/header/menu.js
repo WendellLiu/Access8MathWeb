@@ -39,10 +39,10 @@ const NativeMenu = () => {
 
   return (
     <Popover className="relative">
-      <Popover.Button className="flex items-center text-xl font-semibold leading-8 text-gray-900">
+      <Popover.Button className="flex items-center md:text-xl text-base font-semibold leading-8 text-gray-900">
         <span>{t('more')}</span>
         <ChevronDownIcon
-          className="h-5 w-5 flex-none text-gray-400 ml-2"
+          className="h-5 w-5 flex-none text-gray-400 ml-1"
           aria-hidden="true"
         />
       </Popover.Button>

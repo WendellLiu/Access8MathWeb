@@ -16,7 +16,7 @@ const LanguageMenu = () => {
 
   return (
     <Popover className="relative">
-      <Popover.Button className="flex items-center text-xl font-semibold leading-8 text-gray-900">
+      <Popover.Button className="flex items-center md:text-xl text-base font-semibold leading-8 text-gray-900">
         <LanguageIcon className="h-5 w-5 flex-none mr-1" aria-hidden="true" />
         <span>{commonT(`locale.${i18n.language}`)}</span>
       </Popover.Button>

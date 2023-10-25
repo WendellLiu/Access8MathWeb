@@ -208,7 +208,7 @@ export default function Home() {
   return (
     <div className="w-full h-full flex flex-col md:flex-row overflow-x-hidden overflow-y-auto">
       {/* Left side input panel */}
-      <div className="md:w-1/2 bg-bg1 p-8 flex flex-col">
+      <div className="md:w-1/2 bg-bg1 md:p-8 p-4 flex flex-col">
         <div className="flex justify-between">
           <p role="heading" aria-level="1" className="text-2xl md:text-3xl">
             {t('editContent')}
@@ -221,28 +221,40 @@ export default function Home() {
             <QuestionCircleComponent />
           </button>
         </div>
-        <div className="flex justify-end mb-4 mt-8 md:mt-m1">
+        <div className="flex justify-end mb-4 mt-4 md:mt-m1">
           <Button variant="primary" className="ml-2" onClick={insertMark}>
             {t('mark')}
           </Button>
           <Button
             variant="primary"
-            className="ml-2"
+            className="md:ml-2 ml-1"
+            size="sm"
             onClick={() => laTeXSepConvert('d2b')}
           >
             {t('dollar2bracket')}
           </Button>
           <Button
             variant="primary"
-            className="ml-2"
+            className="md:ml-2 ml-1"
+            size="sm"
             onClick={() => laTeXSepConvert('b2d')}
           >
             {t('bracket2dollar')}
           </Button>
-          <Button variant="primary" className="ml-2" onClick={importClick}>
+          <Button
+            variant="primary"
+            className="md:ml-2 ml-1"
+            size="sm"
+            onClick={importClick}
+          >
             {t('import')}
           </Button>
-          <Button variant="primary" className="ml-2" onClick={exportClick}>
+          <Button
+            variant="primary"
+            className="md:ml-2 ml-1"
+            size="sm"
+            onClick={exportClick}
+          >
             {t('export')}
           </Button>
         </div>
@@ -262,14 +274,14 @@ export default function Home() {
       </div>
 
       {/* Right side output panel */}
-      <div className="md:w-1/2 flex flex-col md:h-full h-[600px] p-8">
+      <div className="md:w-1/2 flex flex-col md:h-full h-[600px] md:p-8 p-4">
         <div className="flex mb-4 w-100 justify-between">
           <p
             role="heading"
             aria-level="1"
             className="text-2xl md:text-3xl w-100"
           >
-            {t('result')}
+            {t('preview')}
           </p>
           <button
             onClick={() => setShowSettingModal(true)}

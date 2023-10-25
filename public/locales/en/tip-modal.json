@@ -14,5 +14,5 @@
       "content": "Users can separate text and math contents using the codes that marks the start and end of Latex, which the start code is \\( and the end code is \\), the content input in the space in between the start and end code will be the math content in Latex while the content input outside will be the text content."
     }
   ],
-  "cancelLabel": "understand"
+  "cancelLabel": "Understand"
 }

@@ -4,11 +4,11 @@
   "import": "import",
   "export": "export",
   "descript": "descript",
-  "result": "Result",
-  "useDescript": "Instruction",
-  "understand": "understand",
+  "preview": "Preview",
   "language": "EN",
   "changeLanguage": "Change language",
   "languageChanged": "Change to English",
-  "setting": "Setting"
+  "setting": "Setting",
+  "bracket2dollar": "{} to $",
+  "dollar2bracket": "$ to {}"
 }

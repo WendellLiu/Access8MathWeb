@@ -56,7 +56,7 @@ const NativeMenu = () => {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1"
       >
-        <Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
+        <Popover.Panel className="absolute right-0 z-10 mt-5 flex w-screen max-w-max">
           <div className="overflow-hidden rounded-xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
             <div>
               {items.map(({ id, name, href }) => (

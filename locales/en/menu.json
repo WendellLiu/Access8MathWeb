@@ -1,10 +1,10 @@
 {
   "more": "More",
-  "addonDownload": "NVDA addon download",
-  "tutorialVideo": "tutorial video",
-  "tutorialDownload": "tutorial download",
-  "caseSharing": "case sharing",
-  "audiovisualReport": "audiovisual report",
+  "addonDownload": "NVDA Addon Download",
+  "tutorialVideo": "Tutorial Video",
+  "tutorialDownload": "Tutorial Download",
+  "caseSharing": "Case Sharing",
+  "audiovisualReport": "Audiovisual Report",
   "ntnuNews": "NTNU news",
-  "developmentRepository": "development repository"
+  "developmentRepository": "Repository"
 }

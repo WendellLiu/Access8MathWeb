@@ -39,53 +39,55 @@ const NativeMenu = () => {
 
   return (
     <Menu as="div" className="relative">
-      <div>
-        <Menu.Button
-          className="flex items-center md:text-xl text-base font-semibold leading-8 text-gray-900"
-          aria-label={t('more')}
-        >
-          <span>{t('more')}</span>
-          <ChevronDownIcon
-            className="h-5 w-5 flex-none text-gray-400 ml-1"
-            aria-hidden="true"
-          />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute right-0 z-10 mt-5 flex w-screen max-w-max">
-          <div className="overflow-hidden rounded-xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
-            <div>
-              {items.map(({ id, name, href }) => (
-                <Menu.Item key={id}>
-                  {({ active }) => {
-                    return (
-                      <a
-                        href={href}
-                        className={`${
-                          active ? 'font-bold' : 'font-normal'
-                        } text-gray-900 group relative flex rounded-lg p-4 hover:bg-gray-50`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {name}
-                      </a>
-                    );
-                  }}
-                </Menu.Item>
-              ))}
-            </div>
-          </div>
-        </Menu.Items>
-      </Transition>
+      {({ open }) => (
+        <>
+          <Menu.Button
+            className="flex items-center md:text-xl text-base font-semibold leading-8 text-gray-900"
+            aria-label={t('more')}
+          >
+            <span>{t('more')}</span>
+            <ChevronDownIcon
+              className="h-5 w-5 flex-none text-gray-400 ml-1"
+              aria-hidden="true"
+            />
+          </Menu.Button>
+          {open && <div className="fixed z-10 inset-0 bg-black opacity-30" />}
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute right-0 z-10 mt-5 flex w-screen max-w-max">
+              <div className="overflow-hidden rounded-xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                <div>
+                  {items.map(({ id, name, href }) => (
+                    <Menu.Item key={id}>
+                      {({ active }) => {
+                        return (
+                          <a
+                            href={href}
+                            className={`${
+                              active ? 'font-bold' : 'font-normal'
+                            } text-gray-900 group relative flex rounded-lg p-4 hover:bg-gray-50`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {name}
+                          </a>
+                        );
+                      }}
+                    </Menu.Item>
+                  ))}
+                </div>
+              </div>
+            </Menu.Items>
+          </Transition>
+        </>
+      )}
     </Menu>
   );
 };

@@ -13,12 +13,15 @@ export const LocaleContextProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    i18n.changeLanguage(locale);
+  }, [locale]);
+
+  useEffect(() => {
     const newLocale = searchParams.get(LOCALE_KEY);
 
     if (newLocale && newLocale !== locale) {
       const decodedLocale = decodeURIComponent(newLocale);
       setLocale(decodedLocale);
-      i18n.changeLanguage(decodedLocale);
     }
   }, [locale, searchParams]);
 

@@ -1,17 +1,21 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { LocaleContextProvider } from '@/lib/locale-switch';
+
 import Header from './header';
 
 const Layout = () => {
   return (
-    <div>
-      <Header />
+    <LocaleContextProvider>
+      <div>
+        <Header />
 
-      <main className="pt-20 md:h-screen w-screen ">
-        <Outlet />
-      </main>
-    </div>
+        <main className="pt-20 md:h-screen w-screen ">
+          <Outlet />
+        </main>
+      </div>
+    </LocaleContextProvider>
   );
 };
 

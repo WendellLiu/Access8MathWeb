@@ -3,6 +3,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { LanguageIcon } from '@heroicons/react/20/solid';
 
 import i18n, { useTranslation } from '@/lib/i18n';
+import { useLocaleContext } from '@/lib/locale-switch';
 
 const LANGUAGES = [
   { locale: 'zh-TW' },
@@ -13,6 +14,7 @@ const LANGUAGES = [
 
 const LanguageMenu = () => {
   const t = useTranslation('common');
+  const { changeLocale } = useLocaleContext();
 
   return (
     <Menu as="div" className="relative">
@@ -20,7 +22,7 @@ const LanguageMenu = () => {
         <>
           <Menu.Button
             className="flex items-center md:text-xl text-base font-semibold leading-8 text-gray-900"
-            aria-label={t('locale.${i18n.language}')}
+            aria-label={t('changeLocale')}
           >
             <LanguageIcon
               className="h-5 w-5 flex-none mr-1"
@@ -50,7 +52,7 @@ const LanguageMenu = () => {
                             className={`group relative flex rounded-lg p-4 hover:bg-gray-50 text-gray-900 w-full ${
                               active ? 'font-bold' : 'font-normal'
                             }`}
-                            onClick={() => i18n.changeLanguage(locale)}
+                            onClick={() => changeLocale(locale)}
                           >
                             {t(`locale.${locale}`)}
                           </button>

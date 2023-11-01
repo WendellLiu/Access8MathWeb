@@ -4,6 +4,30 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 import { useTranslation } from '@/lib/i18n';
 
+const addonDownloadClick = () => {
+  fetch('https://www.nvaccess.org/addonStore/en/all/latest.json', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const result = data.filter((item) => item['addonId'] === 'Access8Math');
+      const link = document.createElement('a');
+
+      link.href = result[0]['URL'];
+      link.setAttribute('download', 'export.txt');
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    })
+    .catch((error) => {
+      console.error('Fetch Error:', error);
+    });
+};
+
 const ABOUT_ITEMS = [
   { id: 'tutorialVideo', href: 'https://www.youtube.com/watch?v=E6DuuiuS6zo' },
   {
@@ -64,6 +88,21 @@ const NativeMenu = () => {
             <Menu.Items className="absolute right-0 z-10 mt-5 flex w-screen max-w-max">
               <div className="overflow-hidden rounded-xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
                 <div>
+                  <Menu.Item>
+                    {({ active }) => {
+                      return (
+                        <button
+                          className={`${
+                            active ? 'font-bold' : 'font-normal'
+                          } text-gray-900 group relative flex rounded-lg p-4 hover:bg-gray-50 w-full`}
+                          onClick={addonDownloadClick}
+                        >
+                          {t('addonDownload')}
+                        </button>
+                      );
+                    }}
+                  </Menu.Item>
+
                   {items.map(({ id, name, href }) => (
                     <Menu.Item key={id}>
                       {({ active }) => {

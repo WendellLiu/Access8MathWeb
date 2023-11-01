@@ -29,7 +29,9 @@
     "two_dimension": "2-Dimension",
     "set": "set",
     "logic": "logic",
-    "greek_alphabet": "greek-alphabet",
+    "lower_greek_alphabet": "lowercase greek alphabet",
+    "upper_greek_alphabet": "uppercase greek alphabet",
+    "greek_alphabet": "greek alphabet",
     "other": "Other"
   },
   "latexs": {
